@@ -1,0 +1,128 @@
+/* Block: cards-products
+ * Text-only product category cards migrated from
+ * https://www.entegris.com/en/home/products.html (.plp-container .card-list)
+ * Values extracted from source computed styles / screenshot sampling:
+ *   card bg #fff, border 1px #e8e8e8, title #393630, body grey ~#6c6a66,
+ *   teal chevron band #2a6a83, 2-up desktop / 1-up mobile.
+ */
+
+.cards-products > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.cards-products > ul > li {
+  position: relative;
+  display: block;
+  background-color: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0 52px 0 0; /* extra right padding leaves room for the teal chevron band */
+  overflow: hidden;
+}
+
+/* Card content */
+.cards-products .cards-products-card-body {
+  margin: 0;
+  padding: 26px 24px 26px 30px;
+}
+
+.cards-products .cards-products-card-body > *:first-child {
+  margin-top: 0;
+}
+
+.cards-products .cards-products-card-body > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Title */
+.cards-products .cards-products-card-body h1,
+.cards-products .cards-products-card-body h2,
+.cards-products .cards-products-card-body h3,
+.cards-products .cards-products-card-body h4,
+.cards-products .cards-products-card-body h5,
+.cards-products .cards-products-card-body h6 {
+  margin: 0 0 12px;
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 1.25;
+  color: #393630;
+}
+
+/* Title link: neutralise the global a{} nowrap/ellipsis + Font Awesome ::after chevron */
+.cards-products .cards-products-card-body a,
+.cards-products .cards-products-card-body a:any-link {
+  display: inline;
+  color: #393630;
+  font: inherit;
+  text-decoration: none;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.cards-products .cards-products-card-body a::after {
+  content: none;
+}
+
+/* Description */
+.cards-products .cards-products-card-body p {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: 15px;
+  line-height: 1.55;
+  color: #6c6a66;
+}
+
+/* Teal chevron affordance band on the right edge */
+.cards-products .cards-products-chevron {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 34px;
+  height: 100%;
+  background-color: #2a6a83;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cards-products .cards-products-chevron::before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  transform: rotate(45deg);
+  margin-left: -3px;
+}
+
+/* Whole card clickable */
+.cards-products .cards-products-linked {
+  cursor: pointer;
+}
+
+.cards-products .cards-products-linked:hover .cards-products-card-body h1,
+.cards-products .cards-products-linked:hover .cards-products-card-body h2,
+.cards-products .cards-products-linked:hover .cards-products-card-body h3,
+.cards-products .cards-products-linked:hover .cards-products-card-body h4,
+.cards-products .cards-products-linked:hover .cards-products-card-body h5,
+.cards-products .cards-products-linked:hover .cards-products-card-body h6,
+.cards-products .cards-products-linked:hover .cards-products-card-body a {
+  color: var(--brand-theme-color, #b31a1b);
+}
+
+/* 2-up on desktop */
+@media (width >= 900px) {
+  .cards-products > ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}

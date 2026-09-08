@@ -1,0 +1,727 @@
+/* stylelint-disable selector-class-pattern -- inherited .hero__badge BEM classes from base hero block */
+/* stylelint-disable font-family-no-missing-generic-family-keyword -- Font Awesome icon font has no generic fallback */
+/* stylelint-disable no-descending-specificity -- inherited base-hero cascade ordering */
+
+/* --------------------------
+   Base Hero Layout
+--------------------------- */
+.hero-masthead-container .hero-masthead-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-masthead {
+  position: relative;
+  padding: 40px 24px;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Ensure all direct child divs stay within the hero bounds */
+.hero-masthead > div {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* --------------------------
+   Headings & Paragraphs
+--------------------------- */
+.hero-masthead h1,
+.hero-masthead h2,
+.hero-masthead h3,
+.hero-masthead h4,
+.hero-masthead h5,
+.hero-masthead h6,
+.hero-masthead p {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: var(--text-light);
+  text-align: center;
+  font-family: var(--black-font-family);
+}
+
+/* Special underline (only for h1 by default) */
+.hero-masthead h1::after {
+  background-color: var(--main-accent-color);
+  content: "";
+  display: block;
+  height: 5px;
+  margin: 20px auto 30px;
+  width: 128px;
+  transition: width .4s ease-in-out;
+}
+
+/* Left-aligned layouts: the title underline hugs the left like the title. */
+.hero-masthead.image-left h1::after,
+.hero-masthead.image-right h1::after,
+.hero-masthead.image-background-text-left h1::after,
+.hero-masthead.image-background-text-right h1::after {
+  margin-left: 0;
+}
+
+/* Remove underline when class applied */
+.hero-masthead.removeunderline h1::after,
+.hero-masthead.removeunderline h2::after,
+.hero-masthead.removeunderline h3::after,
+.hero-masthead.removeunderline h4::after,
+.hero-masthead.removeunderline h5::after,
+.hero-masthead.removeunderline h6::after {
+  display: none;
+}
+
+/* --------------------------
+   Hero Background Image
+--------------------------- */
+.hero-masthead picture {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  box-sizing: border-box;
+}
+
+.hero-masthead img {
+  object-fit: cover;
+  object-position: left;
+  width: 100%;
+  height: 100%;
+}
+
+/* --------------------------
+   Hero Background Video
+--------------------------- */
+video.hero-masthead-video-bg {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* For side-by-side layouts the video sits in-flow */
+.hero-masthead.image-left video.hero-masthead-video-bg,
+.hero-masthead.image-right video.hero-masthead-video-bg,
+.hero-masthead.image-top video.hero-masthead-video-bg,
+.hero-masthead.image-bottom video.hero-masthead-video-bg {
+  position: relative;
+  inset: auto;
+  min-height: 400px;
+}
+
+/* Ensure the asset slot div sizes correctly when holding video */
+.hero-masthead.hero-masthead-video.image-left > div:first-child,
+.hero-masthead.hero-masthead-video.image-right > div:first-child {
+  flex: 0 0 50%;
+  overflow: hidden;
+}
+
+.hero-masthead.hero-masthead-video.image-top > div:first-child,
+.hero-masthead.hero-masthead-video.image-bottom > div:first-child {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+/* --------------------------
+   Buttons
+--------------------------- */
+
+
+/* Primary CTA */
+.hero-masthead-wrapper .button-container.cta-button a.button {
+  background-color: var(--main-accent-color);
+  border: 2px solid var(--main-accent-color);
+}
+
+.hero-masthead-wrapper .button-container.cta-button a.button::after {
+  content: "\f105";
+  font-family: 'Font Awesome 5 Solid';
+  font-size: 20px;
+  margin-left: 8px;
+  transition: all 0.3s ease;
+  color: var(--text-light);
+}
+
+.hero-masthead-wrapper .button-container.cta-button a.button:hover {
+  background-color: rgb(255 255 255 / 10%) !important;
+  color: var(--text-light) !important;
+  border-color: var(--text-light) !important;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 30%) !important;
+  transform: translateY(-1px);
+}
+
+.hero-masthead-wrapper .button-container.cta-button a.button:hover::after {
+  color: var(--text-light) !important;
+  transform: translateX(2px);
+}
+
+/* Secondary CTA */
+.hero-masthead-wrapper .button-container.cta-button-secondary a.button {
+  background: transparent;
+  border: 2px solid var(--main-accent-color);
+  color: var(--text-light);
+}
+
+.hero-masthead-wrapper .button-container.cta-button-secondary a.button::after {
+  content: "\f105";
+  font-family: 'Font Awesome 5 Solid';
+  font-size: 20px;
+  margin-left: 8px;
+  transition: all 0.3s ease;
+  color: var(--text-light);
+}
+
+.hero-masthead-wrapper .button-container.cta-button-secondary a.button:hover {
+  background-color: var(--main-accent-color);
+  color: var(--text-light);
+}
+
+.hero-masthead-wrapper .button-container.cta-button-secondary a.button:hover::after {
+  color: var(--text-dark);
+  transform: translateX(2px);
+}
+
+/* Accessibility */
+.hero-masthead-wrapper .button-container a.button:focus {
+  outline: 2px solid var(--main-accent-color);
+  outline-offset: 2px;
+}
+
+/* Minimal variation */
+.hero-masthead .button-container.cta-minimal a.button::after {
+  margin-left: 4px;
+}
+
+/* --------------------------
+   Layout Variations
+--------------------------- */
+.hero-masthead.image-left,
+.hero-masthead.image-right,
+.hero-masthead.image-top,
+.hero-masthead.image-bottom {
+  gap: 40px;
+  padding: 0;
+  min-height: auto;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 15%);
+  overflow: hidden;
+}
+
+
+.hero-masthead.image-left {
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.hero-masthead.image-right {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+
+.hero-masthead.image-top {
+  flex-direction: column;
+}
+
+.hero-masthead.image-bottom {
+  flex-direction: column-reverse;
+}
+
+/* Image Background Text Left - Text overlaid on background image, left-aligned */
+.hero-masthead.image-background-text-left {
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+  padding: 60px 40px;
+}
+
+.hero-masthead.image-background-text-left > div {
+  text-align: left;
+  max-width: min(600px, 100%);
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Image Background Text Right - Text overlaid on background image, right-aligned */
+.hero-masthead.image-background-text-right {
+  justify-content: flex-end;
+  align-items: center;
+  text-align: left;
+  padding: 60px 40px;
+}
+
+.hero-masthead.image-background-text-right > div {
+  text-align: left;
+  max-width: min(600px, 100%);
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.hero-masthead.image-left picture,
+.hero-masthead.image-right picture,
+.hero-masthead.image-top picture,
+.hero-masthead.image-bottom picture {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-masthead.image-left > div:first-child picture,
+.hero-masthead.image-right > div:first-child picture {
+  height: 100%;
+  width: 100%;
+}
+
+.hero-masthead.image-top picture,
+.hero-masthead.image-bottom picture {
+  width: 100%;
+  height: 400px;
+}
+
+/* Text align adjustments */
+.hero-masthead.image-left > div:first-child,
+.hero-masthead.image-right > div:first-child {
+  flex: 0 0 50%;
+}
+
+.hero-masthead.image-left > div:nth-child(2),
+.hero-masthead.image-right > div:nth-child(2) {
+  flex: 0 0 50%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.hero-masthead.image-right > div:nth-child(2) {
+  padding-left: 80px;
+}
+
+picture {
+    line-height: 0;
+}
+
+
+.hero-masthead.image-left h2,
+.hero-masthead.image-left h3,
+.hero-masthead.image-left h4,
+.hero-masthead.image-left h5,
+.hero-masthead.image-left h6,
+.hero-masthead.image-left p,
+.hero-masthead.image-right h2,
+.hero-masthead.image-right h3,
+.hero-masthead.image-right h4,
+.hero-masthead.image-right h5,
+.hero-masthead.image-right h6,
+.hero-masthead.image-right p {
+  text-align: left;
+  margin: 0;
+  width: 100%;
+  max-width: none;
+  color: var(--text-color);
+    text-shadow: unset;
+}
+
+.hero-masthead.image-left h1,.hero-masthead.image-right h1{
+  color: var(--text-color);
+  text-shadow: unset;
+  text-align: left;
+  margin: 0;
+  width: 100%;
+  max-width: none;
+}
+
+.hero-masthead.image-background-text-left h1,
+.hero-masthead.image-background-text-left h2,
+.hero-masthead.image-background-text-left h3,
+.hero-masthead.image-background-text-left h4,
+.hero-masthead.image-background-text-left h5,
+.hero-masthead.image-background-text-left h6,
+.hero-masthead.image-background-text-left p {
+  text-align: left;
+  margin: 0 0 20px;
+  width: 100%;
+  max-width: none;
+  color: var(--text-light);
+}
+
+.hero-masthead.image-background-text-left .button-container {
+  text-align: left;
+  margin-top: 30px;
+}
+
+.hero-masthead.image-background-text-right h1,
+.hero-masthead.image-background-text-right h2,
+.hero-masthead.image-background-text-right h3,
+.hero-masthead.image-background-text-right h4,
+.hero-masthead.image-background-text-right h5,
+.hero-masthead.image-background-text-right h6,
+.hero-masthead.image-background-text-right p {
+  text-align: left;
+  margin: 0 0 20px;
+  width: 100%;
+  max-width: none;
+  color: var(--text-light);
+}
+
+.hero-masthead.image-background-text-right .button-container {
+  text-align: left;
+  margin-top: 30px;
+}
+
+.hero-masthead.image-top h1,
+.hero-masthead.image-top h2,
+.hero-masthead.image-top h3,
+.hero-masthead.image-top h4,
+.hero-masthead.image-top h5,
+.hero-masthead.image-top h6,
+.hero-masthead.image-top p,
+.hero-masthead.image-bottom h1,
+.hero-masthead.image-bottom h2,
+.hero-masthead.image-bottom h3,
+.hero-masthead.image-bottom h4,
+.hero-masthead.image-bottom h5,
+.hero-masthead.image-bottom h6,
+.hero-masthead.image-bottom p{
+  text-align: center;
+  max-width: none;
+  color: var(--text-color);
+    text-shadow: unset;
+}
+
+/* --------------------------
+   Responsive
+--------------------------- */
+@media (width >= 900px) {
+  .hero-masthead { padding: 40px 32px; }
+
+  .hero-masthead-wrapper a.button {
+    padding: 14px 28px;
+    font-size: 18px;
+  }
+}
+
+@media (width < 1024px) {
+  .hero-masthead { min-height: 650px; }
+
+  .hero-masthead.image-background-text-left {
+    padding: 50px 30px;
+  }
+
+  .hero-masthead.image-background-text-right {
+    padding: 50px 30px;
+  }
+
+  .hero-masthead.image-background-text-left > div,
+  .hero-masthead.image-background-text-right > div {
+    max-width: min(600px, calc(100% - 20px));
+  }
+}
+
+@media (width < 768px) {
+  .hero-masthead { min-height: 600px; }
+
+  .hero-masthead.image-left,
+  .hero-masthead.image-right {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .hero-masthead.image-left picture,
+  .hero-masthead.image-right picture {
+    width: 100%;
+    height: 300px;
+    flex: none;
+  }
+
+  .hero-masthead.hero-masthead-video.image-left video.hero-masthead-video-bg,
+  .hero-masthead.hero-masthead-video.image-right video.hero-masthead-video-bg {
+    min-height: 300px;
+    height: 300px;
+  }
+
+  .hero-masthead.image-left > div:last-child,
+  .hero-masthead.image-right > div:last-child {
+    text-align: center;
+  }
+
+  .hero-masthead.image-left h2,
+  .hero-masthead.image-left h3,
+  .hero-masthead.image-left h4,
+  .hero-masthead.image-left h5,
+  .hero-masthead.image-left h6,
+  .hero-masthead.image-left p,
+  .hero-masthead.image-right h2,
+  .hero-masthead.image-right h3,
+  .hero-masthead.image-right h4,
+  .hero-masthead.image-right h5,
+  .hero-masthead.image-right h6,
+  .hero-masthead.image-right p {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .hero-masthead.image-top picture,
+  .hero-masthead.image-bottom picture {
+    height: 250px;
+  }
+
+  .hero-masthead.hero-masthead-video.image-top > div:first-child,
+  .hero-masthead.hero-masthead-video.image-bottom > div:first-child {
+    height: 250px;
+  }
+
+  .hero-masthead.hero-masthead-video.image-top video.hero-masthead-video-bg,
+  .hero-masthead.hero-masthead-video.image-bottom video.hero-masthead-video-bg {
+    min-height: 250px;
+  }
+  
+  /* Mobile adjustments for image-background-text-left */
+  .hero-masthead.image-background-text-left {
+    padding: 40px 16px;
+    text-align: center;
+  }
+
+  .hero-masthead.image-background-text-left > div {
+    max-width: 100%;
+  }
+
+  .hero-masthead.image-background-text-left h1,
+  .hero-masthead.image-background-text-left h2,
+  .hero-masthead.image-background-text-left h3,
+  .hero-masthead.image-background-text-left h4,
+  .hero-masthead.image-background-text-left h5,
+  .hero-masthead.image-background-text-left h6,
+  .hero-masthead.image-background-text-left p {
+    text-align: center;
+  }
+
+  .hero-masthead.image-background-text-left .button-container {
+    text-align: center;
+  }
+
+  /* Mobile adjustments for image-background-text-right */
+  .hero-masthead.image-background-text-right {
+    padding: 40px 16px;
+    text-align: center;
+  }
+
+  .hero-masthead.image-background-text-right > div {
+    max-width: 100%;
+  }
+
+  .hero-masthead.image-background-text-right h1,
+  .hero-masthead.image-background-text-right h2,
+  .hero-masthead.image-background-text-right h3,
+  .hero-masthead.image-background-text-right h4,
+  .hero-masthead.image-background-text-right h5,
+  .hero-masthead.image-background-text-right h6,
+  .hero-masthead.image-background-text-right p,
+  .hero-masthead.image-background-text-right .button-container {
+    text-align: center;
+  }
+
+  .hero-masthead.image-background-text-right .button-container {
+    text-align: center;
+  }
+
+  /* Default overlay — constrain text on mobile */
+  .hero-masthead.block.overlay .hero-masthead-text {
+    max-width: calc(100% - 32px);
+    padding: 16px;
+  }
+
+  /* Side-by-side layouts — text panel goes full width on mobile */
+  .hero-masthead.image-left > div:nth-child(2),
+  .hero-masthead.image-right > div:nth-child(2) {
+    flex: 1 1 auto;
+    padding: 24px 16px;
+  }
+}
+
+@media (width < 480px) {
+  .hero-masthead {
+    min-height: 400px;
+    padding: 24px 12px;
+  }
+
+  .hero-masthead.image-background-text-left,
+  .hero-masthead.image-background-text-right {
+    padding: 24px 12px;
+  }
+
+  .hero-masthead h1 { font-size: 1.6rem; }
+  .hero-masthead h2 { font-size: 1.3rem; }
+}
+
+/* --------------------------
+   Background Style Variations
+--------------------------- */
+
+/* Theme Dark Background Style — applies to the text box only, never the asset */
+.hero-masthead.theme-dark .hero-masthead-text {
+  background: var(--dark-color);
+}
+
+.hero-masthead.theme-dark h1,
+.hero-masthead.theme-dark h2,
+.hero-masthead.theme-dark h3,
+.hero-masthead.theme-dark h4,
+.hero-masthead.theme-dark h5,
+.hero-masthead.theme-dark h6,
+.hero-masthead.theme-dark p {
+  color: var(--light-color);
+}
+
+.hero-masthead.theme-dark .button-container a.button {
+  color: var(--light-color);
+  border-color: var(--light-color);
+}
+
+/* Theme Light Background Style — applies to the text box only, never the asset */
+.hero-masthead.theme-light .hero-masthead-text {
+  background: var(--light-color);
+}
+
+.hero-masthead.theme-light h1,
+.hero-masthead.theme-light h2,
+.hero-masthead.theme-light h3,
+.hero-masthead.theme-light h4,
+.hero-masthead.theme-light h5,
+.hero-masthead.theme-light h6,
+.hero-masthead.theme-light p {
+  color: var(--dark-color);
+}
+
+.hero-masthead.theme-light .button-container a.button {
+  color: var(--dark-color);
+  border-color: var(--dark-color);
+}
+
+/* Overlay text box — targets .hero-masthead-text class set by JS, so it is always
+   the correct div regardless of whether a <video> was prepended */
+.hero-masthead.block.overlay .hero-masthead-text,
+.hero-masthead.image-background-text-left .hero-masthead-text,
+.hero-masthead.image-background-text-right .hero-masthead-text {
+  padding: 20px;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+/* Default semi-transparent backdrop for the text box — only when no Text
+   Background Style is chosen, so Theme Dark/Light can take over the box bg. */
+.hero-masthead.block.overlay:not(.theme-dark, .theme-light) .hero-masthead-text,
+.hero-masthead.image-background-text-left:not(.theme-dark, .theme-light) .hero-masthead-text,
+.hero-masthead.image-background-text-right:not(.theme-dark, .theme-light) .hero-masthead-text {
+  background: rgb(0 0 0 / 50%);
+}
+
+/* button theme hero specific */
+.hero-masthead.block.overlay .button-container.cta-link a.button,.hero-masthead.image-background-text-left .button-container.cta-link a.button,.hero-masthead.image-background-text-right .button-container.cta-link a.button {
+  color: var(--text-light);
+}
+
+.hero-masthead.block.overlay .button-container.cta-link a.button::after  ,.hero-masthead.image-background-text-left .button-container.cta-link a.button::after,.hero-masthead.image-background-text-right .button-container.cta-link a.button::after  {
+  color: var(--text-light);
+}
+
+/* --------------------------
+   Badge / Highlight pill
+--------------------------- */
+.hero-masthead .hero__badge {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+
+  /* Centered by default so it matches the centered title in the overlay,
+     asset-top and asset-bottom layouts. Auto side margins center a
+     fit-content block; the left-aligned layouts override this below. */
+  margin: 0 auto 12px;
+  padding: 7px 18px;
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--text-light);
+  background: rgb(255 255 255 / 20%);
+  backdrop-filter: blur(4px);
+}
+
+/* --------------------------
+   Image-only masthead (full-width in-flow banner)
+   Source: #heroSection on entegris.com/en/home/products — a single wide
+   Scene7 photograph spanning the content width, no overlay text/CTA.
+   Displayed image area ~1358x386 (aspect ~3.52:1), ~50px bottom margin.
+--------------------------- */
+.hero-masthead.image-only {
+  display: block;
+  position: relative;
+  padding: 0;
+  margin: 0 0 50px;
+  overflow: hidden;
+
+  /* Full width of the wrapper; keep the source aspect ratio so the banner has a
+     sensible height even before the Scene7 image resolves (dev pipeline). */
+  width: 100%;
+  aspect-ratio: 3.52 / 1;
+
+  /* Guard rails if aspect-ratio is unsupported or the image is absent. */
+  min-height: 240px;
+  max-height: 520px;
+}
+
+/* The picture/image sits in-flow and fills the banner box. */
+.hero-masthead.image-only picture {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-masthead.image-only img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* No overlay text box in the image-only variant. */
+.hero-masthead.image-only .hero-masthead-text {
+  display: none;
+}
+
+/* Mobile: a slightly taller banner reads better on narrow screens. */
+@media (width < 768px) {
+  .hero-masthead.image-only {
+    aspect-ratio: 2 / 1;
+    min-height: 180px;
+    margin-bottom: 32px;
+  }
+}
+
+/* Left-aligned layouts: the badge hugs the left edge like the title/text. */
+.hero-masthead.image-left .hero__badge,
+.hero-masthead.image-right .hero__badge,
+.hero-masthead.image-background-text-left .hero__badge,
+.hero-masthead.image-background-text-right .hero__badge {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* Light text-panel layouts (dark title): badge uses dark text + a faint
+   dark chip to stay legible. */
+.hero-masthead.image-left .hero__badge,
+.hero-masthead.image-right .hero__badge,
+.hero-masthead.image-top .hero__badge,
+.hero-masthead.image-bottom .hero__badge {
+  color: var(--text-color);
+  background: rgb(0 0 0 / 8%);
+}

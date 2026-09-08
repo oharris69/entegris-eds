@@ -7,3 +7,15 @@ helix-importer-ui
 .DS_Store
 *.bak
 .idea
+
+# EDS local content (lives in AEM/DA, not the code repo)
+/content/
+
+# Migration scratch / generated importer artifacts
+migration-work/
+tools/importer/bd-snapshots/
+tools/importer/reports/
+tools/importer/*.bundle.js
+
+# Stray localized image dump from scraping (images belong under /content)
+/en/

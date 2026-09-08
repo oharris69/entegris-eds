@@ -1,0 +1,39 @@
+{
+  "variantName": "cards-resources",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-09-03T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.entegris.com/en/home.html",
+    "originPage": "Entegris homepage",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "grey",
+    "density": "spacious",
+    "purpose": "feature",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + category tag + title + date",
+    "buttonCount": 0,
+    "imageCount": 1,
+    "cardCount": 9
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "resource/news/blog/event card grids with photographic thumbnails",
+      "3-column responsive card listings with image + title + metadata",
+      "'connect and collaborate' style aggregator sections"
+    ],
+    "notSuitableFor": [
+      "icon-only shortcut rows (use cards-solutions)",
+      "side-by-side text/image feature layout (use columns-media)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/en/home"],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-03T00:00:00.000Z"
+  }
+}

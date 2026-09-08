@@ -1,0 +1,42 @@
+{
+  "variantName": "cards-products",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-09-08T16:25:30.314Z",
+  "sourceContext": {
+    "originUrl": "https://www.entegris.com/en/home/products.html",
+    "originPage": "Entegris Product Catalog index page",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "product-catalog",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "title + description + link (text-only card, no image/icon)",
+    "buttonCount": 0,
+    "imageCount": 0,
+    "cardCount": 11
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "text-only category/product index grids (title + description + link)",
+      "product-catalog / landing page navigation card grids without imagery",
+      "2-column responsive listings of linked category tiles"
+    ],
+    "notSuitableFor": [
+      "icon + label shortcut rows (use cards-solutions)",
+      "image + tag + title + date resource/news grids (use cards-resources)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "/en/home/products",
+      "/en/home/products/chemistries/specialty-chemicals/post-cmp-cleaning-solutions/semiconductor-cleaning-solutions"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-09-08T16:46:20.051Z"
+  }
+}

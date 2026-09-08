@@ -1,0 +1,179 @@
+{
+  "metadata": {
+    "projectType": "xwalk"
+  },
+  "templates": [
+    {
+      "name": "about-us",
+      "urls": [
+        "https://www.entegris.com/en/home/about-us/locations.html"
+      ],
+      "representativeUrl": "https://www.entegris.com/en/home/about-us/locations.html",
+      "description": "Entegris Locations page: title, regional maps image, and address directories for North America, Europe/Israel, and Asia/Pacific. All default content.",
+      "blocks": [],
+      "sections": [
+        { "id": "loc-title", "name": "Title", "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(1)", "style": null, "blocks": [], "defaultContent": ["#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(1)"] },
+        { "id": "loc-divider", "name": "Divider", "selector": "#maincontent > div.one-column-page > div.horizontalline.basecomponent:nth-of-type(2)", "style": null, "blocks": [], "defaultContent": ["#maincontent > div.one-column-page > div.horizontalline.basecomponent:nth-of-type(2)"] },
+        { "id": "loc-maps", "name": "Regional Maps", "selector": "#maincontent > div.one-column-page > div.basicimage.basecomponent:nth-of-type(3)", "style": null, "blocks": [], "defaultContent": ["#maincontent > div.one-column-page > div.basicimage.basecomponent:nth-of-type(3)"] },
+        { "id": "loc-hq", "name": "Corporate Headquarters heading", "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(4)", "style": null, "blocks": [], "defaultContent": ["#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(4)"] },
+        { "id": "loc-north-america", "name": "North America addresses", "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(5)", "style": null, "blocks": [], "defaultContent": ["#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(5)"] },
+        { "id": "loc-europe-heading", "name": "Europe and Israel heading", "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(6)", "style": null, "blocks": [], "defaultContent": ["#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(6)"] },
+        { "id": "loc-europe-body", "name": "Europe and Israel addresses", "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(7)", "style": null, "blocks": [], "defaultContent": ["#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(7)"] },
+        { "id": "loc-asia-heading", "name": "Asia/Pacific heading", "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(8)", "style": null, "blocks": [], "defaultContent": ["#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(8)"] },
+        { "id": "loc-asia-body", "name": "Asia/Pacific addresses", "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(9)", "style": null, "blocks": [], "defaultContent": ["#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(9)"] }
+      ],
+      "urlPattern": "/en/home/about-us/*"
+    },
+    {
+      "name": "home",
+      "urls": [
+        "https://www.entegris.com/en/home.html"
+      ],
+      "representativeUrl": "https://www.entegris.com/en/home.html",
+      "description": "Entegris homepage: hero carousel, intro statements, working-together columns, solutions icons, hiring banner, and resource card grid.",
+      "blocks": [
+        {
+          "name": "carousel-hero",
+          "instances": [
+            ".slider-container #heroSection",
+            ".hero-section .orbit",
+            ".slider-container"
+          ]
+        },
+        {
+          "name": "columns-media",
+          "instances": [
+            ".slideout.basecomponent .slideout-variation1",
+            ".slideout.basecomponent"
+          ]
+        },
+        {
+          "name": "cards-solutions",
+          "instances": [
+            ".section-2 .icon-list",
+            ".section-2 .wrap-section"
+          ]
+        },
+        {
+          "name": "cards-resources",
+          "instances": [
+            ".mediacontainer.basecomponent .mediahomepage-wrap",
+            ".mediahomepage-wrap"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "rc3",
+          "name": "Hero Carousel",
+          "selector": "body > div.main-wrapper > div.page-content > div:nth-of-type(2)",
+          "style": null,
+          "blocks": [
+            "carousel-hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc4",
+          "name": "Innovation Together",
+          "selector": "#maincontent > div.one-column-page > div.contentcomponent.basecomponent:nth-of-type(1)",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#maincontent > div.one-column-page > div.contentcomponent.basecomponent:nth-of-type(1)"
+          ]
+        },
+        {
+          "id": "rc5",
+          "name": "Success Together",
+          "selector": "#maincontent > div.one-column-page > div.contentcomponent.basecomponent:nth-of-type(2)",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#maincontent > div.one-column-page > div.contentcomponent.basecomponent:nth-of-type(2)"
+          ]
+        },
+        {
+          "id": "rc6",
+          "name": "Working Together",
+          "selector": "#maincontent > div.one-column-page > div.slideout.basecomponent",
+          "style": null,
+          "blocks": [
+            "columns-media"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc8",
+          "name": "Our Solutions",
+          "selector": "#maincontent > div.one-column-page > div.contentcomponent.basecomponent:nth-of-type(5)",
+          "style": "dark",
+          "blocks": [
+            "cards-solutions"
+          ],
+          "defaultContent": [
+            "#maincontent > div.one-column-page > div.contentcomponent.basecomponent:nth-of-type(5)"
+          ]
+        },
+        {
+          "id": "rc9",
+          "name": "Entegris is hiring",
+          "selector": "#maincontent > div.one-column-page > div.contentcomponent.basecomponent:nth-of-type(6)",
+          "style": "red",
+          "blocks": [],
+          "defaultContent": [
+            "#maincontent > div.one-column-page > div.contentcomponent.basecomponent:nth-of-type(6)"
+          ]
+        },
+        {
+          "id": "rc10",
+          "name": "Connect and Collaborate",
+          "selector": "#maincontent > div.one-column-page > div.mediacontainer.basecomponent",
+          "style": "grey",
+          "blocks": [
+            "cards-resources"
+          ],
+          "defaultContent": [
+            "#maincontent > div.one-column-page > div.mediacontainer.basecomponent"
+          ]
+        }
+      ],
+      "urlPattern": "/en/*"
+    },
+    {
+      "name": "products",
+      "urls": [
+        "https://www.entegris.com/en/home/products.html"
+      ],
+      "representativeUrl": "https://www.entegris.com/en/home/products.html",
+      "description": "Entegris Product Catalog index: static hero masthead, intro + featured-video promo, and an 11-card product-category grid.",
+      "blocks": [
+        { "name": "hero-masthead", "instances": ["#heroSection", ".hero-section"] },
+        { "name": "teaser-promo", "instances": [".espot.two-col", ".espot-wrapper.desktop"] },
+        { "name": "cards-products", "instances": [".plp-container .card-list", ".card-list"] }
+      ],
+      "sections": [
+        { "id": "prod-hero", "name": "Hero masthead", "selector": "#heroSection", "style": null, "blocks": ["hero-masthead"], "defaultContent": [] },
+        { "id": "prod-intro", "name": "Intro + featured video", "selector": "#maincontent > div.one-column-page", "style": null, "blocks": ["teaser-promo"], "defaultContent": ["#maincontent > div.one-column-page"] },
+        { "id": "prod-grid", "name": "Product category grid", "selector": ".pagelist .plp-container", "style": null, "blocks": ["cards-products"], "defaultContent": [] }
+      ],
+      "urlPattern": "/en/home/products*"
+    },
+    {
+      "name": "post-cmp-cleaning-solutions",
+      "urls": [
+        "https://www.entegris.com/en/home/products/chemistries/specialty-chemicals/post-cmp-cleaning-solutions/semiconductor-cleaning-solutions.html"
+      ],
+      "representativeUrl": "https://www.entegris.com/en/home/products/chemistries/specialty-chemicals/post-cmp-cleaning-solutions/semiconductor-cleaning-solutions.html",
+      "description": "Product detail page: title + intro prose, a featured-white-paper promo, and a 2-card solutions grid.",
+      "blocks": [
+        { "name": "teaser-promo", "instances": [".espot.two-col", ".espot-wrapper.desktop"] },
+        { "name": "cards-products", "instances": [".plp-container .card-list", ".card-list"] }
+      ],
+      "sections": [
+        { "id": "pcmp-main", "name": "Product detail content", "selector": "#maincontent > div.one-column-page", "style": null, "blocks": ["teaser-promo", "cards-products"], "defaultContent": ["#maincontent > div.one-column-page"] }
+      ],
+      "urlPattern": "/en/home/products/chemistries/specialty-chemicals/post-cmp-cleaning-solutions/*"
+    }
+  ]
+}

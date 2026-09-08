@@ -1,41 +1,117 @@
+/* Entegris footer */
+
 footer {
-  background-color: var(--dark-color);
-  font-size: var(--body-font-size-xs);
-  font-family: var(--light-font-family);
-  background-color: var(--dark-color-opacity);
-  background-color: #000;
-  width: 100%;
-  z-index: 2;
-  color: #ffffff;
+  background-color: var(--brand-footer-background-color, #ece9e7);
+  color: var(--brand-footer-text-color, #0a0a0a);
+  font-family: var(--body-font-family);
+  font-size: 14px;
 }
 
-footer .footer > div {
-  margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+footer .footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  max-width: 1264px;
+  margin: 0 auto;
+  padding: 3rem 2rem 1rem;
+  align-items: flex-start;
 }
 
-footer .footer p {
+footer .footer > div { padding: 0; }
+
+footer ul {
+  list-style: none;
   margin: 0;
+  padding: 0;
 }
 
-footer .footer img {
-  width: 100px;
-  height: auto;
-  margin-bottom: 20px;
-}
-
-footer .footer a {
-  color: #ffffff;
+footer a {
+  color: #575249;
   text-decoration: none;
 }
 
-footer .footer a:hover {
-  color: var(--main-accent-color);
+footer a:hover { color: var(--brand-theme-color, #e5401c); }
+
+/* brand + worldwide contacts */
+footer .footer-brand {
+  flex: 1 1 220px;
+}
+
+footer .footer-brand img {
+  width: 150px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+footer .footer-brand ul li { margin-bottom: 0.35rem; }
+
+footer .footer-brand a[href^='tel'] {
+  color: #0a0a0a;
+  font-weight: 700;
+}
+
+/* primary link column */
+footer .footer-links {
+  flex: 2 1 420px;
+}
+
+footer .footer-links ul {
+  columns: 2;
+  column-gap: 2rem;
 }
 
 @media (width >= 900px) {
-  footer .footer > div {
-    padding: 50px 32px;
-  }
+  footer .footer-links ul { columns: 3; }
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+footer .footer-links li { margin-bottom: 0.75rem; }
+
+footer .footer-links a {
+  font-weight: 600;
+  color: #393630;
+}
+
+/* social */
+footer .footer-social {
+  flex: 1 1 160px;
+}
+
+footer .footer-social ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+footer .footer-social a {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* legal bar */
+footer .footer-legal {
+  flex: 1 1 100%;
+  border-top: 1px solid #d8d2ce;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+footer .footer-legal ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+footer .footer-legal a { font-size: 13px; }
+
+footer .footer-legal p {
+  margin: 0;
+  font-size: 13px;
+  color: #7a746c;
 }

@@ -1,0 +1,40 @@
+{
+  "variantName": "hero-masthead",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-09-08T16:25:30.314Z",
+  "sourceContext": {
+    "originUrl": "https://www.entegris.com/en/home/products.html",
+    "originPage": "Entegris Product Catalog index page",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "masthead",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "full-bleed image banner (no overlay text)",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "static full-width photographic page mastheads/banners",
+      "interior/landing page top-of-page hero images without rotating slides",
+      "image-only heros where heading/CTA are optional"
+    ],
+    "notSuitableFor": [
+      "rotating multi-slide hero banners with overlay text (use carousel-hero)",
+      "text + image side-by-side feature layouts (use columns-media)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "/en/home/products"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-08T16:25:30.314Z"
+  }
+}

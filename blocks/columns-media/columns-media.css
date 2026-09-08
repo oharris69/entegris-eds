@@ -1,0 +1,129 @@
+/* columns-media -- design migrated from entegris.com .slideout-variation1 ("Working Together") */
+
+/* Source: text column LEFT (charcoal H2 + red accent bar + light paragraph + ghost CTA), photo RIGHT. */
+
+/* ---- Base (mobile-first): stacked, image on top, text below ---- */
+.columns-media > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns-media img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* image cell first in DOM -> renders on top on mobile */
+.columns-media > div > .columns-media-img-col {
+  order: 0;
+  padding: 0;
+}
+
+.columns-media > div > .columns-media-img-col img {
+  display: block;
+}
+
+/* text cell */
+.columns-media > div > div:not(.columns-media-img-col) {
+  order: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px 24px 40px;
+}
+
+/* heading -- charcoal, light weight, Trade Gothic */
+.columns-media h2 {
+  margin: 0 0 20px;
+  font-family: var(--heading-font-family);
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 1.1;
+  color: rgb(54 57 48);
+}
+
+/* red accent bar under the heading */
+.columns-media h2::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin-top: 20px;
+  background-color: var(--brand-theme-color, #b31a1b);
+}
+
+/* paragraph -- Open Sans, light weight */
+.columns-media p {
+  margin: 0 0 10px;
+  font-family: var(--body-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: rgb(10 10 10);
+}
+
+/* CTA -- ghost / outlined uppercase button */
+.columns-media p.button-container {
+  margin-top: 22px;
+}
+
+.columns-media a.button:any-link {
+  display: inline-block;
+  padding: 14px 24px;
+  border: 1px solid rgb(57 54 48);
+  border-radius: 2px;
+  background-color: transparent;
+  color: rgb(54 57 48);
+  font-family: var(--heading-font-family);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: normal;
+  overflow: visible;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* suppress the global Font Awesome arrow -- source button has no arrow */
+.columns-media a.button:any-link::after {
+  content: none;
+}
+
+.columns-media a.button:any-link:hover,
+.columns-media a.button:any-link:focus {
+  background-color: rgb(57 54 48);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* ---- Desktop: text LEFT, photo RIGHT filling to edge ---- */
+@media (width >= 900px) {
+  .columns-media > div {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  /* text column on the left */
+  .columns-media > div > div:not(.columns-media-img-col) {
+    order: 0;
+    flex: 0 0 44%;
+    padding: 60px 72px 60px 0;
+  }
+
+  /* image column on the right */
+  .columns-media > div > .columns-media-img-col {
+    order: 1;
+    flex: 0 0 56%;
+    align-self: stretch;
+  }
+
+  .columns-media > div > .columns-media-img-col picture,
+  .columns-media > div > .columns-media-img-col img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

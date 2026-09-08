@@ -1,0 +1,222 @@
+/* Block: carousel-hero
+ * Visual design migrated from www.entegris.com/en/home.html (#heroSection).
+ * Values extracted from source computed styles. See migration-work/carousel-hero-extracted.css.
+ * Source hero images are Scene7/lazy-loaded and are empty in migrated content, so each
+ * slide falls back to a dark charcoal placeholder with light text so the panel, CTA and
+ * bullets stay legible. A real <picture> in the image cell will cover the placeholder.
+ */
+
+/* --- Full-bleed: escape the 1200px section wrapper and section margins --- */
+main .section.carousel-hero-container {
+  margin: 0;
+  padding: 0;
+}
+
+main .section.carousel-hero-container > .carousel-hero-wrapper {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-hero {
+  position: relative;
+}
+
+/* --- Slides scroller --- */
+.carousel-hero .carousel-hero-slides-container {
+  position: relative;
+}
+
+.carousel-hero .carousel-hero-slides,
+.carousel-hero .carousel-hero-slide-indicators {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-hero .carousel-hero-slides {
+  display: flex;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  overflow: scroll clip;
+}
+
+.carousel-hero .carousel-hero-slides::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- Individual slide --- */
+.carousel-hero .carousel-hero-slide {
+  position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  scroll-snap-align: start;
+
+  /* source crop 960x462 (~0.48) on mobile */
+  min-height: max(440px, 52vw);
+
+  /* dark placeholder shown when the Scene7 image is missing */
+  background: linear-gradient(135deg, #4a453e 0%, #2b2925 100%);
+  overflow: hidden;
+}
+
+/* --- Slide background image (covers the placeholder when present) --- */
+.carousel-hero .carousel-hero-slide .carousel-hero-slide-image {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+
+.carousel-hero .carousel-hero-slide .carousel-hero-slide-image picture,
+.carousel-hero .carousel-hero-slide .carousel-hero-slide-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Text panel (eyebrow/H1 + H6 subheading + CTA) --- */
+.carousel-hero .carousel-hero-slide .carousel-hero-slide-content {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 24px;
+  right: 24px;
+  transform: translateY(-50%);
+  text-align: left;
+  color: #fff;
+}
+
+.carousel-hero .carousel-hero-slide-content h1 {
+  margin: 0 0 20px;
+  font-family: "Trade Gothic LT Std", helvetica, arial, sans-serif;
+  font-size: 34px;
+  line-height: 34px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.carousel-hero .carousel-hero-slide-content h6 {
+  margin: 0 0 25px;
+  font-family: "Open Sans", helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 22.4px;
+  font-weight: 300;
+  text-transform: none;
+  color: rgb(255 255 255 / 90%);
+}
+
+/* --- CTA button (source: #393630 bg, white text, 2px radius, 17px uppercase) --- */
+
+/* border made light so the dark button reads on the dark placeholder background */
+main .carousel-hero .carousel-hero-slide-content .button-container {
+  margin: 0;
+}
+
+main .carousel-hero .carousel-hero-slide-content a.button:any-link {
+  display: inline-block;
+  margin: 0;
+  padding: 15px 30px;
+  background-color: #393630;
+  color: #e8e8e8;
+  border: 1px solid rgb(255 255 255 / 55%);
+  border-radius: 2px;
+  font-family: "Trade Gothic LT Std", helvetica, arial, sans-serif;
+  font-size: 17px;
+  line-height: 17px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: normal;
+  overflow: visible;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* remove the global Font Awesome arrow appended to links */
+main .carousel-hero .carousel-hero-slide-content a.button::after {
+  content: none;
+}
+
+main .carousel-hero .carousel-hero-slide-content a.button:any-link:hover,
+main .carousel-hero .carousel-hero-slide-content a.button:any-link:focus {
+  background-color: #fff;
+  color: #393630;
+  text-decoration: none;
+}
+
+/* --- Slide indicator bar (bullets) overlaid at the bottom --- */
+.carousel-hero nav[aria-label] {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 100%;
+}
+
+.carousel-hero .carousel-hero-slide-indicators {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0 12px;
+  min-height: 36px;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(255 255 255 / 75%);
+  line-height: 0;
+}
+
+.carousel-hero .carousel-hero-slide-indicator {
+  margin: 12px 6px;
+}
+
+.carousel-hero .carousel-hero-slide-indicator button {
+  width: 12px;
+  height: 12px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: #9e9e9e;
+  transition: background-color 0.2s;
+}
+
+.carousel-hero .carousel-hero-slide-indicator button:disabled,
+.carousel-hero .carousel-hero-slide-indicator button:hover,
+.carousel-hero .carousel-hero-slide-indicator button:focus-visible {
+  background-color: #e74c3c;
+}
+
+/* Source hero navigates via bullets only -- hide the prev/next arrows */
+.carousel-hero .carousel-hero-navigation-buttons {
+  display: none;
+}
+
+/* --- Desktop --- */
+@media (width >= 900px) {
+  .carousel-hero .carousel-hero-slide {
+    /* source crop 1900x720 (~0.379) full-bleed */
+    min-height: max(460px, 38vw);
+  }
+
+  .carousel-hero .carousel-hero-slide .carousel-hero-slide-content {
+    left: 70px;
+    right: auto;
+    width: 40%;
+    max-width: 620px;
+  }
+
+  .carousel-hero .carousel-hero-slide-content h1 {
+    margin: 0 0 40px;
+    font-size: 49px;
+    line-height: 49px;
+  }
+
+  .carousel-hero .carousel-hero-slide-content h6 {
+    margin: 0 0 40px;
+    font-size: 18.2px;
+    line-height: 29.12px;
+  }
+}

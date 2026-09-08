@@ -1,46 +1,26 @@
-import { getMetadata } from '../../scripts/aem.js';
-import { loadFragment } from '../fragment/fragment.js';
-import { isAuthorEnvironment } from '../../scripts/scripts.js';
-
-import {
-  getLanguage, getSiteName, TAG_ROOT, PATH_PREFIX, fetchLanguageNavigation,
-} from '../../scripts/utils.js';
+// Entegris footer — renders from content/footer.plain.html.
+// Content-first: all links/copy live in the fragment; this file reads it.
 
 /**
- * loads and decorates the footer
+ * Loads and decorates the footer.
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  const footerMeta = getMetadata('footer');
-  const langCode = getLanguage();
-  const siteName = await getSiteName();
-  const isAuthor = isAuthorEnvironment();
-  let footerPath =`/${langCode}/footer`;
+  // Dual-fetch: /content first (localhost / aem up), then root (DA/EDS prod).
+  let resp = await fetch('/content/footer.plain.html');
+  if (!resp.ok) resp = await fetch('/footer.plain.html');
+  if (!resp.ok) return;
 
-  if(isAuthor){
-    footerPath = footerMeta
-    ? new URL(footerMeta, window.location).pathname
-    : `/content/${siteName}${PATH_PREFIX}/${langCode}/footer`;
-  }
-
-  /*
-  // load footer as fragment
-  const footerMeta = getMetadata('footer');
-  //const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
-  const pathSegments = window.location.pathname.split('/').filter(Boolean);
-  //console.log("pathSegments footer: ", pathSegments);
-  const parentPath = pathSegments.length > 2 ? `/${pathSegments.slice(0, 3).join('/')}` : '/';
-  //console.log("parentPath footer: ", parentPath);
-  const footerPath = parentPath=='/' ? footerMeta ? new URL(footerMeta, window.location).pathname : '/footer' : footerMeta ? new URL(footerMeta, window.location).pathname : parentPath+'/footer';
-  //console.log("footerPath footer: ", footerPath);
-  */
-  
-  const fragment = await loadFragment(footerPath);
-
-  // decorate footer DOM
-  block.textContent = '';
+  const html = await resp.text();
   const footer = document.createElement('div');
-  while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
+  footer.innerHTML = html;
 
+  const [brand, links, social, legal] = footer.children;
+  if (brand) brand.classList.add('footer-brand');
+  if (links) links.classList.add('footer-links');
+  if (social) social.classList.add('footer-social');
+  if (legal) legal.classList.add('footer-legal');
+
+  block.textContent = '';
   block.append(footer);
 }

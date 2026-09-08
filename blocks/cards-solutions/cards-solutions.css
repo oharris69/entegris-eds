@@ -1,0 +1,108 @@
+/* cards-solutions -- "Our Solutions" icon row
+   Source: .icon-list on entegris.com/en/home.html
+   Rendered inside .section.dark -> labels white, icons inverted to white for legibility. */
+
+/* list: horizontal row of icon items, centered */
+.cards-solutions > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 32px 0;
+}
+
+/* each item: icon stacked above centered label */
+.cards-solutions > ul > li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 0;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  flex: 0 0 50%;          /* mobile: 2-across, wraps */
+  max-width: 50%;
+}
+
+/* icon cell */
+.cards-solutions .cards-solutions-card-image {
+  line-height: 0;
+  margin: 0;
+}
+
+.cards-solutions .cards-solutions-card-image p {
+  margin: 0;
+}
+
+/* source icon = 64x64 dark line-art; invert to white on the dark section */
+.cards-solutions .cards-solutions-card-image img {
+  width: 64px;
+  height: 64px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+/* label cell */
+.cards-solutions .cards-solutions-card-body {
+  margin: 12px 0 0;
+}
+
+.cards-solutions .cards-solutions-card-body p {
+  margin: 0;
+}
+
+/* reset EDS button auto-decoration -> plain centered label link */
+.cards-solutions .cards-solutions-card-body p.button-container {
+  margin: 12px 0 0;
+}
+
+main .cards-solutions a.button:any-link {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  color: #fff;
+  font-family: "Open Sans", helvetica, arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18.2px;
+  text-align: center;
+  text-transform: none;
+  text-decoration: none;
+  white-space: normal;
+  overflow: visible;
+}
+
+/* remove the global Font Awesome chevron on these labels */
+main .cards-solutions a.button::after,
+main .cards-solutions a:any-link::after {
+  content: none;
+}
+
+main .cards-solutions a.button:hover,
+main .cards-solutions a.button:focus,
+main .cards-solutions a:hover,
+main .cards-solutions a:focus {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* desktop: 4-across single row */
+@media (width >= 900px) {
+  .cards-solutions > ul {
+    flex-wrap: nowrap;
+    gap: 0;
+  }
+
+  .cards-solutions > ul > li {
+    flex: 0 0 192px;
+    max-width: 192px;
+  }
+}

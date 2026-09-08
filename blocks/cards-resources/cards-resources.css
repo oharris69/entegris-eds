@@ -1,0 +1,165 @@
+/* Block: cards-resources -- "Connect and Collaborate" resource grid.
+   Values extracted from source computed styles (www.entegris.com home).
+   Source cards use a background image with a red category ribbon overlay; the
+   migrated content has no images, so cards render as white tiles with a red
+   uppercase category tag, a title link, and a muted date. */
+
+/* Section heading ("Connect and Collaborate") - default content in the same
+   grey section as the block. Source: centered, Trade Gothic light, charcoal,
+   with a short red underline. */
+.cards-resources-container .default-content-wrapper h2 {
+  text-align: center;
+  font-family: var(--heading-font-family);
+  font-weight: 300;
+  color: var(--brand-dark-color, #393630);
+  margin: 0 0 40px;
+  padding-bottom: 14px;
+  position: relative;
+}
+
+.cards-resources-container .default-content-wrapper h2::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 2px;
+  background-color: var(--brand-theme-color, #b31a1b);
+}
+
+/* Card grid: 1 column mobile, base */
+.cards-resources > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+.cards-resources > ul > li {
+  background-color: #fff;
+  border: 1px solid rgb(232 232 232);
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Empty image cell (no image in migrated content) - collapse it */
+.cards-resources .cards-resources-card-image {
+  display: none;
+}
+
+/* Text cell: category tag + title link + date */
+.cards-resources .cards-resources-card-body {
+  padding: 20px 15px 30px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Category tag (EVENT / BLOG / NEWS) - red uppercase */
+.cards-resources .cards-resources-card-body > p:first-child {
+  margin: 0 0 15px;
+  color: var(--brand-theme-color, #b31a1b);
+  font-family: var(--heading-font-family);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* Title heading + link */
+.cards-resources .cards-resources-card-body h3 {
+  margin: 0 0 30px;
+  font-family: var(--heading-font-family);
+  font-weight: 300;
+  font-size: 27px;
+  line-height: 1.3;
+  color: var(--brand-dark-color, #393630);
+}
+
+/* Title link - override global a (nowrap/ellipsis + chevron ::after) */
+.cards-resources .cards-resources-card-body h3 a,
+.cards-resources .cards-resources-card-body h3 a:any-link {
+  display: inline;
+  color: var(--brand-dark-color, #393630);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  text-decoration: none;
+  text-transform: none;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.cards-resources .cards-resources-card-body h3 a::after {
+  content: none;
+}
+
+.cards-resources .cards-resources-card-body h3 a:hover {
+  color: var(--brand-theme-color, #b31a1b);
+  text-decoration: none;
+}
+
+/* Date - muted grey uppercase, pinned to the bottom of the card */
+.cards-resources .cards-resources-card-body > p:last-child {
+  margin: auto 0 0;
+  color: #6b6763;
+  font-family: var(--heading-font-family);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 19.5px;
+  text-transform: uppercase;
+}
+
+/* Visit Newsroom button (default content after the block) - outlined charcoal */
+.cards-resources-container .default-content-wrapper .button-container {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.cards-resources-container .default-content-wrapper a.button:any-link {
+  display: inline-block;
+  padding: 12px 58px;
+  background-color: transparent;
+  color: var(--brand-dark-color, #393630);
+  border: 1px solid var(--brand-dark-color, #393630);
+  border-radius: 2px;
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: normal;
+  overflow: visible;
+}
+
+.cards-resources-container .default-content-wrapper a.button:any-link::after {
+  content: none;
+}
+
+.cards-resources-container .default-content-wrapper a.button:hover {
+  background-color: var(--brand-dark-color, #393630);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Tablet: 2 columns */
+@media (width >= 768px) {
+  .cards-resources > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop: 3 columns */
+@media (width >= 900px) {
+  .cards-resources > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
