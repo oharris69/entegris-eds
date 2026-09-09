@@ -91,8 +91,19 @@ function translate(html) {
   return out;
 }
 
+/**
+ * Repoint internal links from the /en tree to /zh. Only rewrites root-relative
+ * anchor hrefs beginning with "/en/" (or exactly "/en"). Leaves external links
+ * (blog.entegris.com, investor.*, supplier.*, absolute https URLs) and image
+ * asset src="https://www.entegris.com/en/images/..." untouched, since those
+ * still resolve against the real English asset host.
+ */
+function repointLinks(html) {
+  return html.replace(/href="\/en(\/[^"]*|)"/g, (_, rest) => `href="/zh${rest}"`);
+}
+
 const src = fs.readFileSync(SRC, 'utf-8');
-const zh = translate(src);
+const zh = repointLinks(translate(src));
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
 fs.writeFileSync(OUT, zh);
 
