@@ -1,0 +1,139 @@
+/*
+ * Teaser CTA — slim full-width clickable action band.
+ * Heading (left, Open Sans) + single plain-text CTA (right, Trade Gothic);
+ * the whole band is a clickable link.
+ *
+ * Values extracted from source (entegris.com contamination-control page,
+ * 3 .contactus-espot bands) via computed styles + pixel-sampled screenshots.
+ * Default (grey) variant: white band, charcoal text, thin bottom rule.
+ * Red variant (newsletter): red plexus artwork with a white elliptical CTA cutout.
+ */
+
+.teaser-cta {
+  margin: 0;
+}
+
+/* Clickable band ---------------------------------------------------------- */
+.teaser-cta .teaser-cta-band {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 126px;          /* source band height */
+  padding: 8px 30px 8px 15px; /* source: heading pad 10px 5px, content pad 70px 30px 70px 50px collapsed to band */
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;           /* clip red artwork / cutout */
+  white-space: normal;
+}
+
+.teaser-cta .teaser-cta-band:hover,
+.teaser-cta .teaser-cta-band:focus {
+  text-decoration: none;
+}
+
+/* Source CTA is plain text — suppress the global Font Awesome chevron on the
+   band link (styles.css adds a::after "\f105"). */
+.teaser-cta .teaser-cta-band::after,
+.teaser-cta .teaser-cta-band:hover::after,
+.teaser-cta .teaser-cta-band:focus::after {
+  content: none;
+  display: none;
+}
+
+/* Heading (left) ---------------------------------------------------------- */
+.teaser-cta .teaser-cta-heading {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.teaser-cta .teaser-cta-heading h3 {
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', helvetica, arial, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.3;           /* 28.6px */
+  color: var(--brand-dark-color, #393630);
+}
+
+/* CTA (right) ------------------------------------------------------------- */
+.teaser-cta .teaser-cta-action {
+  flex: 0 0 auto;
+}
+
+.teaser-cta .teaser-cta-label {
+  display: inline-block;
+  font-family: 'Trade Gothic LT Std', helvetica, arial, sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.3;           /* 31.2px */
+  color: var(--brand-dark-color, #393630);
+  white-space: nowrap;
+}
+
+/* Default / grey variant: white band with a thin bottom separator --------- */
+
+/* JS always adds either .grey or .red; .grey is the default. */
+.teaser-cta.grey .teaser-cta-band {
+  background-color: transparent;
+  border-bottom: 1px solid var(--brand-light-color, #ece9e7);
+  transition: background-color 0.2s ease;
+}
+
+/* Red variant: plexus artwork band with white elliptical CTA cutout ------- */
+.teaser-cta.red .teaser-cta-band {
+  /* SVG (950x125.9) carries the red plexus fill + elliptical white cutout.
+     Anchor it LEFT at natural aspect over the white page, exactly like source:
+     red where the SVG is, white to its right where the CTA sits. */
+  background-color: var(--brand-background-color, #fefefe);
+  background-image: url('./teaser-cta-red.svg');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: auto 100%;
+  transition: filter 0.2s ease;
+}
+
+.teaser-cta.red .teaser-cta-heading h3 {
+  color: #fff;
+}
+
+/* CTA text stays dark; on the red band it sits inside the white cutout. */
+.teaser-cta.red .teaser-cta-label {
+  color: var(--brand-dark-color, #393630);
+}
+
+.teaser-cta.grey .teaser-cta-band:hover {
+  background-color: var(--brand-light-color, #ece9e7);
+}
+
+.teaser-cta.red .teaser-cta-band:hover {
+  filter: brightness(0.94);
+}
+
+/* Responsive -------------------------------------------------------------- */
+@media (width <= 700px) {
+  .teaser-cta .teaser-cta-band {
+    gap: 16px;
+    min-height: 96px;
+    padding: 16px;
+  }
+
+  .teaser-cta .teaser-cta-heading h3 {
+    font-size: 18px;
+  }
+
+  .teaser-cta .teaser-cta-label {
+    font-size: 20px;
+  }
+
+  /* On mobile the SVG cutout doesn't align; use a flat red band. */
+  .teaser-cta.red .teaser-cta-band {
+    background-image: none;
+    background-color: #b32f25;
+  }
+
+  .teaser-cta.red .teaser-cta-label {
+    color: #fff;
+  }
+}

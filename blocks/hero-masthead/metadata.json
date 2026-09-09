@@ -32,9 +32,10 @@
   },
   "usage": {
     "pagesUsing": [
-      "/en/home/products"
+      "/en/home/products",
+      "/en/home/our-science/by-solution-area/contamination-control"
     ],
-    "reuseCount": 1,
-    "lastUsed": "2026-09-08T16:25:30.314Z"
+    "reuseCount": 2,
+    "lastUsed": "2026-09-09T00:00:00.000Z"
   }
 }

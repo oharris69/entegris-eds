@@ -1,0 +1,67 @@
+{
+  "definitions": [
+    {
+      "title": "Teaser CTA",
+      "id": "teaser-cta",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Teaser CTA",
+              "model": "teaser-cta",
+              "key-value": true
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "teaser-cta",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "value": "",
+          "name": "title",
+          "label": "Heading"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "buttonText",
+          "value": "Learn More",
+          "label": "Button Text"
+        },
+        {
+          "component": "aem-content",
+          "name": "btn-link",
+          "label": "Button Link",
+          "valueType": "string",
+          "rootPath": "",
+          "description": "Path the whole band links to."
+        },
+        {
+          "component": "select",
+          "name": "classes",
+          "label": "Color",
+          "valueType": "string",
+          "value": "grey",
+          "options": [
+            {
+              "name": "Grey",
+              "value": "grey"
+            },
+            {
+              "name": "Red / Accent",
+              "value": "red"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

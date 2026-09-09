@@ -1,0 +1,33 @@
+{
+  "variantName": "cards-insights",
+  "baseBlock": "cards",
+  "createdFrom": "https://www.entegris.com/en/home/our-science/by-solution-area/contamination-control.html",
+  "createdAt": "2026-09-09T00:00:00.000Z",
+  "visualCharacteristics": {
+    "purpose": "feature",
+    "colorScheme": "light",
+    "density": "spacious",
+    "imagePattern": "large",
+    "structure": "heading + list of rows (thumbnail-left + linked title + description)",
+    "layout": "horizontal-media-row-list"
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "'Featured Insights' style article/resource lists",
+      "vertical single-column lists of rows with a left thumbnail + linked title + short description",
+      "editorial/insight roundups where items read as a list rather than a card grid"
+    ],
+    "notSuitableFor": [
+      "image-on-top responsive card grids (use cards-resources)",
+      "text-only category/product index grids (use cards-products)",
+      "icon-based navigation rows (use cards-solutions)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "/en/home/our-science/by-solution-area/contamination-control"
+    ],
+    "reuseCount": 0,
+    "lastUsed": "2026-09-09T00:00:00.000Z"
+  }
+}

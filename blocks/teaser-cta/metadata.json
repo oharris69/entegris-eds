@@ -1,0 +1,32 @@
+{
+  "variantName": "teaser-cta",
+  "baseBlock": "teaser",
+  "createdFrom": "https://www.entegris.com/en/home/our-science/by-solution-area/contamination-control.html",
+  "createdAt": "2026-09-09T00:00:00.000Z",
+  "visualCharacteristics": {
+    "purpose": "cta",
+    "colorScheme": "accent",
+    "density": "compact",
+    "imagePattern": "noimg",
+    "structure": "heading + single CTA button (horizontal band)",
+    "layout": "full-width-clickable-band"
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "slim full-width clickable action/CTA bands (Contact Us / Find Us / newsletter signup)",
+      "text-only colored callout strips with a heading and a single CTA",
+      "repeating end-of-page contact/subscribe prompts"
+    ],
+    "notSuitableFor": [
+      "media/video promo tiles with a thumbnail and eyebrow (use teaser-promo)",
+      "content requiring an image or multiple CTAs"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "/en/home/our-science/by-solution-area/contamination-control"
+    ],
+    "reuseCount": 0,
+    "lastUsed": "2026-09-09T00:00:00.000Z"
+  }
+}

@@ -286,10 +286,76 @@
     ]
   },
   {
-    "id": "card",
+    "id": "insight",
     "fields": [
       {
         "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Thumbnail Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Thumbnail Alt Text"
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Title & Description",
+        "description": "Linked title (as a heading/link) followed by a short description.",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "card",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "ctastyle",
+        "label": "CTA Style",
+        "valueType": "string",
+        "value": "button",
+        "options": [
+          {
+            "name": "Primary Button",
+            "value": "button"
+          },
+          {
+            "name": "Secondary Button",
+            "value": "button-secondary"
+          },
+          {
+            "name": "Dark Button",
+            "value": "button-dark"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "card",
+    "fields": [
+      {
+        "component": "richtext",
         "valueType": "string",
         "name": "image",
         "label": "Image",
@@ -308,7 +374,7 @@
     "id": "card",
     "fields": [
       {
-        "component": "reference",
+        "component": "richtext",
         "valueType": "string",
         "name": "image",
         "label": "Image",
@@ -367,7 +433,7 @@
     "id": "carousel-hero-item",
     "fields": [
       {
-        "component": "reference",
+        "component": "richtext",
         "valueType": "string",
         "name": "media_image",
         "label": "Background Image",
@@ -6272,6 +6338,140 @@
     ]
   },
   {
+    "id": "hero-masthead",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "image",
+        "label": "Asset",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "boolean",
+        "label": "Enable Underline in Title",
+        "description": "Enable underline in title",
+        "name": "enableunderline",
+        "value": "true",
+        "valueType": "boolean"
+      },
+      {
+        "component": "select",
+        "name": "herolayout",
+        "label": "Hero Layout Style",
+        "options": [
+          {
+            "name": "Default (Asset-Background)",
+            "value": "overlay"
+          },
+          {
+            "name": "Asset Left",
+            "value": "image-left"
+          },
+          {
+            "name": "Asset Right",
+            "value": "image-right"
+          },
+          {
+            "name": "Asset Top",
+            "value": "image-top"
+          },
+          {
+            "name": "Asset Bottom",
+            "value": "image-bottom"
+          },
+          {
+            "name": "Asset-Background Text-Left",
+            "value": "image-background-text-left"
+          },
+          {
+            "name": "Asset-Background Text-Right",
+            "value": "image-background-text-right"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "backgroundstyle",
+        "label": "Text Background Style",
+        "options": [
+          {
+            "name": "Default",
+            "value": "default"
+          },
+          {
+            "name": "Theme Dark",
+            "value": "theme-dark"
+          },
+          {
+            "name": "Theme Light",
+            "value": "theme-light"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "ctalabel",
+        "label": "CTA Button Label",
+        "description": "Text shown on the call-to-action button. Leave empty to hide the button.",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "ctalink",
+        "label": "CTA Button Link",
+        "description": "Target page or URL for the call-to-action button."
+      },
+      {
+        "component": "select",
+        "name": "ctastyle",
+        "label": "CTA Style",
+        "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
+          {
+            "name": "Button",
+            "value": "button"
+          },
+          {
+            "name": "Button secondary",
+            "value": "button-secondary"
+          },
+          {
+            "name": "Link",
+            "value": "link"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "badge",
+        "label": "Badge / Highlight Text",
+        "description": "Optional pill-style label shown above the title.",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "hero",
     "fields": [
       {
@@ -6647,6 +6847,223 @@
         "value": "",
         "label": "Content",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "teaser-cta",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "value": "",
+        "name": "title",
+        "label": "Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "buttonText",
+        "value": "Learn More",
+        "label": "Button Text"
+      },
+      {
+        "component": "aem-content",
+        "name": "btn-link",
+        "label": "Button Link",
+        "valueType": "string",
+        "rootPath": "",
+        "description": "Path the whole band links to."
+      },
+      {
+        "component": "select",
+        "name": "classes",
+        "label": "Color",
+        "valueType": "string",
+        "value": "grey",
+        "options": [
+          {
+            "name": "Grey",
+            "value": "grey"
+          },
+          {
+            "name": "Red / Accent",
+            "value": "red"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "teaser-promo",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "value": "Your text will show here.",
+        "name": "title",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "teaserStyle",
+        "value": "image",
+        "label": "Style",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Video",
+            "value": "video"
+          },
+          {
+            "name": "Image",
+            "value": "image"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "teaserStyle",
+        "value": "image",
+        "label": "Style",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Video",
+            "value": "video"
+          },
+          {
+            "name": "Image",
+            "value": "image"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Video Properties",
+        "name": "videoProperties",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "teaserStyle"
+            },
+            "video"
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "videoReference",
+            "label": "Video Reference",
+            "multi": false,
+            "description": "Provide a URL for the video background."
+          },
+          {
+            "component": "select",
+            "name": "videoBehavior",
+            "value": "autoplay",
+            "label": "Video Behavior (on load)",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Autoplay",
+                "value": "autoplay"
+              },
+              {
+                "name": "Pause",
+                "value": "pause"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Image Properties",
+        "name": "imageProperties",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "teaserStyle"
+            },
+            "image"
+          ]
+        },
+        "fields": [
+          {
+            "component": "reference",
+            "valueType": "string",
+            "name": "imageRef",
+            "label": "Image",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "alt",
+            "value": "Default alt",
+            "label": "Alt Text"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Button Properties",
+        "name": "buttonProperties",
+        "valueType": "string",
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "buttonText",
+            "value": "Button",
+            "label": "Button Text"
+          },
+          {
+            "component": "aem-content",
+            "name": "btn-link",
+            "label": "Button Link",
+            "valueType": "string",
+            "rootPath": "",
+            "description": "Path to linked AEM content"
+          },
+          {
+            "component": "select",
+            "name": "ctastyle",
+            "label": "CTA Style",
+            "valueType": "string",
+            "value": "button",
+            "options": [
+              {
+                "name": "Default Button",
+                "value": "default"
+              },
+              {
+                "name": "Primary Button",
+                "value": "button"
+              },
+              {
+                "name": "Secondary Button",
+                "value": "button-secondary"
+              },
+              {
+                "name": "Dark Button",
+                "value": "button-dark"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "boolean",
+        "label": "Enable Swoosh Effect",
+        "description": "Enable Circular effect on the component",
+        "name": "useSwoosh",
+        "value": "true",
+        "valueType": "boolean"
       }
     ]
   },

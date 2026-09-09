@@ -12,15 +12,96 @@
       "description": "Entegris Locations page: title, regional maps image, and address directories for North America, Europe/Israel, and Asia/Pacific. All default content.",
       "blocks": [],
       "sections": [
-        { "id": "loc-title", "name": "Title", "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(1)", "style": null, "blocks": [], "defaultContent": ["#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(1)"] },
-        { "id": "loc-divider", "name": "Divider", "selector": "#maincontent > div.one-column-page > div.horizontalline.basecomponent:nth-of-type(2)", "style": null, "blocks": [], "defaultContent": ["#maincontent > div.one-column-page > div.horizontalline.basecomponent:nth-of-type(2)"] },
-        { "id": "loc-maps", "name": "Regional Maps", "selector": "#maincontent > div.one-column-page > div.basicimage.basecomponent:nth-of-type(3)", "style": null, "blocks": [], "defaultContent": ["#maincontent > div.one-column-page > div.basicimage.basecomponent:nth-of-type(3)"] },
-        { "id": "loc-hq", "name": "Corporate Headquarters heading", "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(4)", "style": null, "blocks": [], "defaultContent": ["#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(4)"] },
-        { "id": "loc-north-america", "name": "North America addresses", "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(5)", "style": null, "blocks": [], "defaultContent": ["#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(5)"] },
-        { "id": "loc-europe-heading", "name": "Europe and Israel heading", "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(6)", "style": null, "blocks": [], "defaultContent": ["#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(6)"] },
-        { "id": "loc-europe-body", "name": "Europe and Israel addresses", "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(7)", "style": null, "blocks": [], "defaultContent": ["#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(7)"] },
-        { "id": "loc-asia-heading", "name": "Asia/Pacific heading", "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(8)", "style": null, "blocks": [], "defaultContent": ["#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(8)"] },
-        { "id": "loc-asia-body", "name": "Asia/Pacific addresses", "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(9)", "style": null, "blocks": [], "defaultContent": ["#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(9)"] }
+        {
+          "id": "loc-title",
+          "name": "Title",
+          "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(1)",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(1)"
+          ]
+        },
+        {
+          "id": "loc-divider",
+          "name": "Divider",
+          "selector": "#maincontent > div.one-column-page > div.horizontalline.basecomponent:nth-of-type(2)",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#maincontent > div.one-column-page > div.horizontalline.basecomponent:nth-of-type(2)"
+          ]
+        },
+        {
+          "id": "loc-maps",
+          "name": "Regional Maps",
+          "selector": "#maincontent > div.one-column-page > div.basicimage.basecomponent:nth-of-type(3)",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#maincontent > div.one-column-page > div.basicimage.basecomponent:nth-of-type(3)"
+          ]
+        },
+        {
+          "id": "loc-hq",
+          "name": "Corporate Headquarters heading",
+          "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(4)",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(4)"
+          ]
+        },
+        {
+          "id": "loc-north-america",
+          "name": "North America addresses",
+          "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(5)",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(5)"
+          ]
+        },
+        {
+          "id": "loc-europe-heading",
+          "name": "Europe and Israel heading",
+          "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(6)",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(6)"
+          ]
+        },
+        {
+          "id": "loc-europe-body",
+          "name": "Europe and Israel addresses",
+          "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(7)",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(7)"
+          ]
+        },
+        {
+          "id": "loc-asia-heading",
+          "name": "Asia/Pacific heading",
+          "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(8)",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(8)"
+          ]
+        },
+        {
+          "id": "loc-asia-body",
+          "name": "Asia/Pacific addresses",
+          "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(9)",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(9)"
+          ]
+        }
       ],
       "urlPattern": "/en/home/about-us/*"
     },
@@ -148,14 +229,61 @@
       "representativeUrl": "https://www.entegris.com/en/home/products.html",
       "description": "Entegris Product Catalog index: static hero masthead, intro + featured-video promo, and an 11-card product-category grid.",
       "blocks": [
-        { "name": "hero-masthead", "instances": ["#heroSection", ".hero-section"] },
-        { "name": "teaser-promo", "instances": [".espot.two-col", ".espot-wrapper.desktop"] },
-        { "name": "cards-products", "instances": [".plp-container .card-list", ".card-list"] }
+        {
+          "name": "hero-masthead",
+          "instances": [
+            "#heroSection",
+            ".hero-section"
+          ]
+        },
+        {
+          "name": "teaser-promo",
+          "instances": [
+            ".espot.two-col",
+            ".espot-wrapper.desktop"
+          ]
+        },
+        {
+          "name": "cards-products",
+          "instances": [
+            ".plp-container .card-list",
+            ".card-list"
+          ]
+        }
       ],
       "sections": [
-        { "id": "prod-hero", "name": "Hero masthead", "selector": "#heroSection", "style": null, "blocks": ["hero-masthead"], "defaultContent": [] },
-        { "id": "prod-intro", "name": "Intro + featured video", "selector": "#maincontent > div.one-column-page", "style": null, "blocks": ["teaser-promo"], "defaultContent": ["#maincontent > div.one-column-page"] },
-        { "id": "prod-grid", "name": "Product category grid", "selector": ".pagelist .plp-container", "style": null, "blocks": ["cards-products"], "defaultContent": [] }
+        {
+          "id": "prod-hero",
+          "name": "Hero masthead",
+          "selector": "#heroSection",
+          "style": null,
+          "blocks": [
+            "hero-masthead"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "prod-intro",
+          "name": "Intro + featured video",
+          "selector": "#maincontent > div.one-column-page",
+          "style": null,
+          "blocks": [
+            "teaser-promo"
+          ],
+          "defaultContent": [
+            "#maincontent > div.one-column-page"
+          ]
+        },
+        {
+          "id": "prod-grid",
+          "name": "Product category grid",
+          "selector": ".pagelist .plp-container",
+          "style": null,
+          "blocks": [
+            "cards-products"
+          ],
+          "defaultContent": []
+        }
       ],
       "urlPattern": "/en/home/products*"
     },
@@ -167,13 +295,171 @@
       "representativeUrl": "https://www.entegris.com/en/home/products/chemistries/specialty-chemicals/post-cmp-cleaning-solutions/semiconductor-cleaning-solutions.html",
       "description": "Product detail page: title + intro prose, a featured-white-paper promo, and a 2-card solutions grid.",
       "blocks": [
-        { "name": "teaser-promo", "instances": [".espot.two-col", ".espot-wrapper.desktop"] },
-        { "name": "cards-products", "instances": [".plp-container .card-list", ".card-list"] }
+        {
+          "name": "teaser-promo",
+          "instances": [
+            ".espot.two-col",
+            ".espot-wrapper.desktop"
+          ]
+        },
+        {
+          "name": "cards-products",
+          "instances": [
+            ".plp-container .card-list",
+            ".card-list"
+          ]
+        }
       ],
       "sections": [
-        { "id": "pcmp-main", "name": "Product detail content", "selector": "#maincontent > div.one-column-page", "style": null, "blocks": ["teaser-promo", "cards-products"], "defaultContent": ["#maincontent > div.one-column-page"] }
+        {
+          "id": "pcmp-main",
+          "name": "Product detail content",
+          "selector": "#maincontent > div.one-column-page",
+          "style": null,
+          "blocks": [
+            "teaser-promo",
+            "cards-products"
+          ],
+          "defaultContent": [
+            "#maincontent > div.one-column-page"
+          ]
+        }
       ],
       "urlPattern": "/en/home/products/chemistries/specialty-chemicals/post-cmp-cleaning-solutions/*"
+    },
+    {
+      "name": "solution-area",
+      "urls": [
+        "https://www.entegris.com/en/home/our-science/by-solution-area/contamination-control.html",
+        "https://www.entegris.com/en/home/our-science/by-solution-area/fluid-management.html",
+        "https://www.entegris.com/en/home/our-science/by-solution-area/specialty-materials.html",
+        "https://www.entegris.com/en/home/our-science/by-solution-area/substrate-handling.html"
+      ],
+      "representativeUrl": "https://www.entegris.com/en/home/our-science/by-solution-area/contamination-control.html",
+      "description": "Solution-area landing page: masthead, intro columns, optional promo/video, featured-insights list, contact/CTA bands, and a connect-and-collaborate card grid. Shared by all four by-solution-area pages.",
+      "blocks": [
+        {
+          "name": "hero-masthead",
+          "instances": [
+            "#heroSection",
+            ".hero-section"
+          ]
+        },
+        {
+          "name": "columns-media",
+          "instances": [
+            ".newcolumncontrol.basecomponent"
+          ]
+        },
+        {
+          "name": "teaser-promo",
+          "instances": [
+            ".spotlight.basecomponent"
+          ]
+        },
+        {
+          "name": "cards-insights",
+          "instances": [
+            ".eventproductfeature.basecomponent"
+          ]
+        },
+        {
+          "name": "teaser-cta",
+          "instances": [
+            ".contactus-espot.basecomponent"
+          ]
+        },
+        {
+          "name": "cards-resources",
+          "instances": [
+            ".mediacontainer.basecomponent .mediahomepage-wrap",
+            ".mediahomepage-wrap"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "sa-hero",
+          "name": "Masthead",
+          "selector": "body > div.main-wrapper > div.page-content > div:nth-of-type(2)",
+          "style": null,
+          "blocks": [
+            "hero-masthead"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "sa-title",
+          "name": "Title",
+          "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(1)",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(1)"
+          ]
+        },
+        {
+          "id": "sa-intro-cols",
+          "name": "Intro columns",
+          "selector": "#maincontent > div.one-column-page > div.newcolumncontrol.basecomponent:nth-of-type(3)",
+          "style": null,
+          "blocks": [
+            "columns-media"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "sa-intro-prose",
+          "name": "Intro prose",
+          "selector": "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(4)",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#maincontent > div.one-column-page > div.richtexteditor.basecomponent:nth-of-type(4)"
+          ]
+        },
+        {
+          "id": "sa-promo",
+          "name": "Featured promo",
+          "selector": "#maincontent > div.one-column-page > div.spotlight.basecomponent",
+          "style": null,
+          "blocks": [
+            "teaser-promo"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "sa-insights",
+          "name": "Featured insights",
+          "selector": "#maincontent > div.one-column-page > div.eventproductfeature.basecomponent",
+          "style": null,
+          "blocks": [
+            "cards-insights"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "sa-contact",
+          "name": "Contact / CTA bands",
+          "selector": "#maincontent > div.one-column-page > div.contactus-espot.basecomponent",
+          "style": null,
+          "blocks": [
+            "teaser-cta"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "sa-connect",
+          "name": "Connect and Collaborate",
+          "selector": "#maincontent > div.one-column-page > div.mediacontainer.basecomponent",
+          "style": "grey",
+          "blocks": [
+            "cards-resources"
+          ],
+          "defaultContent": []
+        }
+      ],
+      "urlPattern": "/en/home/our-science/by-solution-area/*"
     }
   ]
 }

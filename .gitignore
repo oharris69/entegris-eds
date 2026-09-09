@@ -19,3 +19,4 @@ tools/importer/*.bundle.js
 
 # Stray localized image dump from scraping (images belong under /content)
 /en/
+tools/importer/*.bak

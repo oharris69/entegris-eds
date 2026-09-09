@@ -1,0 +1,126 @@
+/*
+ * Cards Insights — horizontal media-row list.
+ * Source: Entegris solution-area ".event-product-feature" ("Featured Insights").
+ * Vertical list of rows: ~200px square thumbnail (left) + linked title +
+ * description (right), separated by hairline dividers. Values below are the
+ * exact computed styles extracted from the source rows.
+ */
+
+.cards-insights ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Row = one insight. Divider + spacing come from the source .item:
+   padding-bottom 42px, margin-bottom 28px, border-bottom 1px solid #cfcece. */
+.cards-insights ul > li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 42px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid rgb(207 206 206);
+}
+
+.cards-insights ul > li:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Thumbnail (source column ~231px incl. 15px padding, image ~201x190) --- */
+.cards-insights .cards-insights-card-image {
+  flex: 0 0 auto;
+  width: 201px;
+  max-width: 100%;
+}
+
+.cards-insights .cards-insights-card-image picture,
+.cards-insights .cards-insights-card-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cards-insights .cards-insights-card-image p {
+  margin: 0;
+}
+
+/* Graceful placeholder: Scene7 thumbnails may be unavailable locally; keep the
+   row layout intact with a light square block instead of a collapsed cell. */
+.cards-insights .cards-insights-card-image:empty,
+.cards-insights .cards-insights-card-image img[src=""] {
+  min-height: 190px;
+  background-color: var(--light-color, #ece9e7);
+}
+
+.cards-insights .cards-insights-card-image img {
+  min-height: 60px;
+  background-color: var(--light-color, #ece9e7);
+}
+
+/* --- Body (title link + description) --- */
+.cards-insights .cards-insights-card-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Source title: a.title 20px/400 Trade Gothic, line-height 32px, red, block,
+   no underline, margin-bottom 10px. In EDS the title is an <h3><a>. */
+.cards-insights .cards-insights-card-body h3 {
+  margin: 0 0 10px;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+.cards-insights .cards-insights-card-body h3 a,
+.cards-insights .cards-insights-card-body h3 a:any-link {
+  display: inline;
+  color: var(--link-color, #b31a1b);
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 32px;
+  text-decoration: none;
+
+  /* Undo global link truncation (white-space:nowrap + ellipsis + chevron). */
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+/* Remove the global Font Awesome chevron the boilerplate appends to links. */
+.cards-insights .cards-insights-card-body h3 a::after {
+  content: none;
+}
+
+.cards-insights .cards-insights-card-body h3 a:hover,
+.cards-insights .cards-insights-card-body h3 a:focus {
+  color: var(--link-hover-color, #e5401c);
+  text-decoration: none;
+}
+
+/* Source description: 20px/300 Open Sans, line-height 30px, #0a0a0a. */
+.cards-insights .cards-insights-card-body p {
+  margin: 0 0 10px;
+  color: var(--text-color, #0a0a0a);
+  font-family: var(--body-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 30px;
+}
+
+.cards-insights .cards-insights-card-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Desktop: thumbnail left, text right (source layout) --- */
+@media (width >= 900px) {
+  .cards-insights ul > li {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 30px;
+  }
+}
