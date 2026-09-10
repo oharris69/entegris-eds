@@ -49,6 +49,15 @@ the migrated `content/**.plain.html` pages and local image binaries. Helpers:
 - Page-level metadata blocks map to `jcr:content` page properties
   (`jcr:title`, `jcr:description`) via md2jcr's page helper — they are not
   emitted as visible body content.
+- The site root `/` is served by a real `index` **page**
+  (`language-masters/en/index`, and `language-masters/zh/index` → `/zh`),
+  installed via `entegris-eds-root-index-1.1.0.zip` and mapped in `paths.json`.
+  Do NOT put the home content directly on the bare language node
+  (`language-masters/en`): it renders in preview/live but AEM's
+  `franklin.delivery` pipeline cannot refetch a bare language container as a
+  root document, so Sidekick "Update" on `/` fails with
+  `AEM_BACKEND_FETCH_FAILED … not authorized to access resource: .../main/`.
+  A named `index` page is a normal cq:Page and refetches like any other.
 - DAM asset nodes declare the full `renditions/original` as an `nt:file` in
   `.content.xml`. Do NOT serialize `<renditions/>` as an empty self-closed
   folder — FileVault then treats the folder as childless, ignores the loose

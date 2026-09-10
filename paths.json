@@ -1,13 +1,13 @@
 {
   "mappings": [
-    "/content/entegris-eds/language-masters/en:/",
+    "/content/entegris-eds/language-masters/en/index:/",
     "/content/entegris-eds/language-masters/en/:/en/",
     "/content/entegris-eds/language-masters/es/:/es/",
     "/content/entegris-eds/language-masters/es:/es",
     "/content/entegris-eds/language-masters/ja/:/ja/",
     "/content/entegris-eds/language-masters/ja:/ja",
+    "/content/entegris-eds/language-masters/zh/index:/zh",
     "/content/entegris-eds/language-masters/zh/:/zh/",
-    "/content/entegris-eds/language-masters/zh:/zh",
     "/content/entegris-eds/configuration:/.helix/config.json",
     "/content/entegris-eds/metadata:/metadata.json",
     "/content/entegris-eds/redirects:/redirects.json",

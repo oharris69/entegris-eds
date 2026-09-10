@@ -1,12 +1,20 @@
 /* eslint-disable */
 /**
- * build-root-index-package.mjs — supplemental package that gives the language
- * nodes their own page, so the site root resolves (English at root per
- * paths.json: language-masters/en -> /, language-masters/zh -> /zh).
+ * build-root-index-package.mjs — supplemental package that gives the site root
+ * a real `index` PAGE, so `/` resolves AND is refetchable by AEM Sidekick.
  *
- * Places the home content AS the language node itself:
- *   /content/entegris-eds/language-masters/en/.content.xml  (from content/en/home.plain.html) -> serves at /
- *   /content/entegris-eds/language-masters/zh/.content.xml  (from content/zh/home.plain.html) -> serves at /zh
+ * Earlier this placed the home content AS the language node itself
+ * (language-masters/en/.content.xml). That renders in preview/live, but AEM's
+ * franklin.delivery pipeline cannot serve a bare language container node as a
+ * root document — Sidekick "Update" on `/` fails with
+ * "not authorized to access resource: .../main/" (AEM_BACKEND_FETCH_FAILED).
+ *
+ * Fix: write the home content to a real child page named `index`:
+ *   /content/entegris-eds/language-masters/en/index  -> mapped to /   (paths.json)
+ *   /content/entegris-eds/language-masters/zh/index  -> mapped to /zh
+ * A named `index` page is a normal published cq:Page, served exactly like
+ * /en/home (which works), so Sidekick can refetch it. Requires the matching
+ * paths.json mapping (language-masters/en/index:/ , language-masters/zh/index:/zh).
  *
  * Output: tools/jcr-package/entegris-eds-root-index.zip
  * Usage:  node tools/jcr-package/build-root-index-package.mjs [workspaceRoot]
@@ -41,10 +49,11 @@ const components = {
   filters: JSON.parse(readFileSync(join(WS, 'component-filters.json'), 'utf8')),
 };
 
-// The language node pages: source home fragment -> JCR node AT the language root.
+// Home content -> a real `index` child page under each language root. Mapped by
+// paths.json: language-masters/en/index -> / , language-masters/zh/index -> /zh.
 const NODES = [
-  { src: 'content/en/home.plain.html', jcr: `${SITE_ROOT}/en` },
-  { src: 'content/zh/home.plain.html', jcr: `${SITE_ROOT}/zh` },
+  { src: 'content/en/home.plain.html', jcr: `${SITE_ROOT}/en/index` },
+  { src: 'content/zh/home.plain.html', jcr: `${SITE_ROOT}/zh/index` },
 ];
 
 const DAM_ROOT = '/content/dam/entegris-eds';
@@ -77,19 +86,13 @@ async function toJcr(rel) {
 }
 
 function filterXml() {
-  // Import the en/zh node itself (as a cq:Page) + its jcr:content, but EXCLUDE
-  // all child nodes so the existing child pages (home/, nav/, footer/, …) are
-  // preserved untouched. Without the excludes, a filter rooted at the node would
-  // delete children not present in this package.
-  const rule = (root) => `  <filter root="${root}">
-    <include pattern="${root}"/>
-    <include pattern="${root}/jcr:content(/.*)?"/>
-    <exclude pattern="${root}/[^/]+(/.*)?"/>
-  </filter>`;
+  // Each `index` page is its own discrete node, so a plain filter rooted at it
+  // is safe — it touches only that page and leaves the language node and all
+  // sibling pages (home/, nav/, footer/, …) untouched.
   return `<?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
-${rule(`${SITE_ROOT}/en`)}
-${rule(`${SITE_ROOT}/zh`)}
+  <filter root="${SITE_ROOT}/en/index"/>
+  <filter root="${SITE_ROOT}/zh/index"/>
 </workspaceFilter>
 `;
 }
