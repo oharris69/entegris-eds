@@ -78,11 +78,16 @@ function localBinaryFor(url) {
 }
 
 function assetContentXml(mime) {
-  // dam:Asset shell. The `original` rendition binary is provided as a physical
-  // file (jcr:content/renditions/original); FileVault auto-wraps it as an
-  // nt:file/nt:resource, so we must NOT re-declare <original> here (that would
-  // double-define the node). We only declare the asset, its metadata (mimetype),
-  // and the renditions folder. AEM fills width/height on asset (re)processing.
+  // dam:Asset node. CRITICAL: the .content.xml must NOT serialize the
+  // renditions folder as empty (self-closed) — that tells FileVault the folder
+  // has no children, so the loose `original` binary on disk is IGNORED and the
+  // asset imports with no image (which DAM then drops, emptying the folder).
+  //
+  // The correct (standard vault) serialization declares the full path down to
+  // the `original` rendition as an nt:file with an nt:resource jcr:content;
+  // vault then attaches the physical binary placed at the matching aggregate
+  // path (_jcr_content/renditions/original). AEM fills width/height and extra
+  // renditions on asset (re)processing.
   return `<?xml version="1.0" encoding="UTF-8"?>
 <jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
     xmlns:dam="http://www.day.com/dam/1.0" xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -90,7 +95,11 @@ function assetContentXml(mime) {
     jcr:primaryType="dam:Asset">
   <jcr:content jcr:primaryType="dam:AssetContent">
     <metadata jcr:primaryType="nt:unstructured" dc:format="${mime}"/>
-    <renditions jcr:primaryType="nt:folder"/>
+    <renditions jcr:primaryType="nt:folder">
+      <original jcr:primaryType="nt:file">
+        <jcr:content jcr:primaryType="nt:resource" jcr:mimeType="${mime}"/>
+      </original>
+    </renditions>
   </jcr:content>
 </jcr:root>
 `;
