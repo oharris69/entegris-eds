@@ -30,10 +30,23 @@ function toggleMenu(nav, expanded) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  // Dual-fetch: /content first (localhost / aem up), then root (DA/EDS prod).
-  let resp = await fetch('/content/nav.plain.html');
-  if (!resp.ok) resp = await fetch('/nav.plain.html');
-  if (!resp.ok) return;
+  // The nav fragment is published per language under the language tree
+  // (/en/nav, /zh/nav). Pick by the current page's language prefix, then fall
+  // back to the other known locations so it resolves in every environment
+  // (published EDS, local aem-up, DA).
+  const lang = window.location.pathname.startsWith('/zh') ? 'zh' : 'en';
+  const candidates = [
+    `/${lang}/nav.plain.html`,
+    '/en/nav.plain.html',
+    '/content/nav.plain.html',
+    '/nav.plain.html',
+  ];
+  // Try each candidate in order, resolving to the first OK response.
+  const resp = await candidates.reduce(
+    (prev, url) => prev.then((r) => (r && r.ok ? r : fetch(url))),
+    Promise.resolve(null),
+  );
+  if (!resp || !resp.ok) return;
 
   // The nav fragment references the logo with a relative path
   // ("images/logo.svg"); make it absolute so it resolves from any page depth

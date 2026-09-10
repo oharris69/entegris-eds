@@ -6,10 +6,22 @@
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  // Dual-fetch: /content first (localhost / aem up), then root (DA/EDS prod).
-  let resp = await fetch('/content/footer.plain.html');
-  if (!resp.ok) resp = await fetch('/footer.plain.html');
-  if (!resp.ok) return;
+  // The footer fragment is published per language under the language tree
+  // (/en/footer, /zh/footer). Pick by the current page's language prefix, then
+  // fall back to the other known locations so it resolves in every environment.
+  const lang = window.location.pathname.startsWith('/zh') ? 'zh' : 'en';
+  const candidates = [
+    `/${lang}/footer.plain.html`,
+    '/en/footer.plain.html',
+    '/content/footer.plain.html',
+    '/footer.plain.html',
+  ];
+  // Try each candidate in order, resolving to the first OK response.
+  const resp = await candidates.reduce(
+    (prev, url) => prev.then((r) => (r && r.ok ? r : fetch(url))),
+    Promise.resolve(null),
+  );
+  if (!resp || !resp.ok) return;
 
   // Make the relative logo path ("images/logo.svg") absolute so it resolves
   // from any page depth rather than 404ing.
