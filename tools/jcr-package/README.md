@@ -1,13 +1,13 @@
 # Entegris EDS — AEM content package
 
-**`entegris-eds-full-1.1.0.zip`** is the single, ready-to-upload AEM content package
+**`entegris-eds-full-1.2.0.zip`** is the single, ready-to-upload AEM content package
 for the migrated Entegris content.
 
 ## Install
 
 1. Open Package Manager on the author:
    `https://author-p7954-e2285674.adobeaemcloud.com/crx/packmgr`
-2. **Upload Package** → choose `entegris-eds-full-1.1.0.zip`
+2. **Upload Package** → choose `entegris-eds-full-1.2.0.zip`
 3. **Install**
 
 That's it — one package, one install. No need to install anything else.
@@ -16,11 +16,17 @@ That's it — one package, one install. No need to install anything else.
 
 A standard CRX/FileVault package (`jcr_root/` + `META-INF/vault/`) containing:
 
-- **18 content pages** under `/content/entegris-eds/language-masters/{en,zh}`
+- **22 content pages** under `/content/entegris-eds/language-masters/{en,zh}`
   (homepage, locations, products index, product detail, the 4 solution-area
-  pages, their `/zh` clones, and nav + footer for each language). `en` and `zh`
-  are language siblings, matching `paths.json`.
-- **23 DAM assets** under `/content/dam/entegris-eds`.
+  pages, the Component Technical Information page, the ChemLock Filter Housing
+  technical-information hub + its 2 topic pages, the `/zh` clones, and nav +
+  footer for each language). `en` and `zh` are language siblings, matching
+  `paths.json`.
+- **24 DAM assets** under `/content/dam/entegris-eds`.
+
+The two ChemLock topic pages carry data tables (chemical-compatibility matrices,
+the wrenches part-number list) authored as **Table blocks** — see
+`blocks/table/` for the block and `_table.json` model (extended to 9 columns).
 
 ## Rebuilding the package
 

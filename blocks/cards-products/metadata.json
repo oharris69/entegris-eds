@@ -35,9 +35,10 @@
     "pagesUsing": [
       "/en/home/products",
       "/en/home/products/chemistries/specialty-chemicals/post-cmp-cleaning-solutions/semiconductor-cleaning-solutions",
-      "/en/home/resources/technical-information/component-technicalinformation"
+      "/en/home/resources/technical-information/component-technicalinformation",
+      "/en/home/resources/technical-information/chemlock-filter-housing-technical-information"
     ],
-    "reuseCount": 3,
-    "lastUsed": "2026-09-10T18:59:12.277Z"
+    "reuseCount": 4,
+    "lastUsed": "2026-09-10T19:12:40.152Z"
   }
 }

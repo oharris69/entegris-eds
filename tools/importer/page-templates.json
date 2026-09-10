@@ -477,6 +477,34 @@
         { "id": "cti-grid", "name": "Sub-topic grid", "selector": ".pagelist .plp-container", "style": null, "blocks": ["cards-products"], "defaultContent": [] }
       ],
       "urlPattern": "/en/home/resources/technical-information/*"
+    },
+    {
+      "name": "chemlock-tech-info",
+      "urls": [
+        "https://www.entegris.com/en/home/resources/technical-information/chemlock-filter-housing-technical-information.html"
+      ],
+      "representativeUrl": "https://www.entegris.com/en/home/resources/technical-information/chemlock-filter-housing-technical-information.html",
+      "description": "ChemLock Filter Housing Technical Information hub: title + intro prose and a 2-card sub-topic grid.",
+      "blocks": [
+        { "name": "cards-products", "instances": [".plp-container .card-list", ".card-list"] }
+      ],
+      "sections": [
+        { "id": "cl-intro", "name": "Title + intro", "selector": "#maincontent > div.one-column-page", "style": null, "blocks": [], "defaultContent": ["#maincontent > div.one-column-page"] },
+        { "id": "cl-grid", "name": "Sub-topic grid", "selector": ".pagelist .plp-container", "style": null, "blocks": ["cards-products"], "defaultContent": [] }
+      ],
+      "urlPattern": "/en/home/resources/technical-information/chemlock-filter-housing-technical-information*"
+    },
+    {
+      "name": "chemlock-topic",
+      "urls": [
+        "https://www.entegris.com/en/home/resources/technical-information/chemlock-filter-housing-technical-information/chemlock-filter-housing-bowl-installation.html",
+        "https://www.entegris.com/en/home/resources/technical-information/chemlock-filter-housing-technical-information/chemlock-filter-housing-chemical-compatibility.html"
+      ],
+      "representativeUrl": "https://www.entegris.com/en/home/resources/technical-information/chemlock-filter-housing-technical-information/chemlock-filter-housing-bowl-installation.html",
+      "description": "ChemLock technical topic pages (bowl installation, chemical compatibility): all default content — headings, prose, notes, images, and tables.",
+      "blocks": [],
+      "sections": [],
+      "urlPattern": "/en/home/resources/technical-information/chemlock-filter-housing-technical-information/*"
     }
   ]
 }

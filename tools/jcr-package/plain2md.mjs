@@ -111,10 +111,27 @@ function sectionMetadataTable(div) {
   };
 }
 
+// The Table block cannot round-trip through md2jcr's markdown→JCR path (the
+// parent model's `filter` field greedily consumes data cells as properties), so
+// Table blocks are emitted as a placeholder paragraph here and their cell data
+// collected on `tables`; build-package.mjs generates the Table block JCR
+// directly and splices it in over the placeholder. Each cell keeps its inner
+// HTML so rich content (sub/sup, strong, links) survives.
+const TABLE_MARKER = (i) => `@@MDTABLE${i}@@`;
+
+function collectTable(blockDiv) {
+  const rowDivs = [...blockDiv.children].filter((el) => el.tagName === 'DIV');
+  return rowDivs.map((r) => {
+    const cellDivs = [...r.children].filter((el) => el.tagName === 'DIV');
+    return (cellDivs.length ? cellDivs : [r]).map((cell) => cell.innerHTML.trim());
+  });
+}
+
 export function plainHtmlToMdast(html, { titleById, JSDOM }) {
   const doc = new JSDOM(`<!DOCTYPE html><html><body><main>${html}</main></body></html>`).window.document;
   const main = doc.querySelector('main');
   const root = { type: 'root', children: [] };
+  const tables = [];
   const sections = [...main.children].filter((el) => el.tagName === 'DIV');
 
   sections.forEach((section, si) => {
@@ -123,6 +140,15 @@ export function plainHtmlToMdast(html, { titleById, JSDOM }) {
       const cls = child.classList && child.classList[0];
       if (child.classList && child.classList.contains('section-metadata')) {
         root.children.push(sectionMetadataTable(child));
+      } else if (child.classList && child.classList.contains('table')) {
+        // Table block — emit a placeholder paragraph isolated in its own
+        // section (thematic breaks) so it lands as a standalone <text> node the
+        // builder can cleanly replace with generated Table JCR. Collect data.
+        const idx = tables.length;
+        tables.push(collectTable(child));
+        root.children.push({ type: 'thematicBreak' });
+        root.children.push(para([txt(TABLE_MARKER(idx))]));
+        root.children.push({ type: 'thematicBreak' });
       } else if (cls && titleById[cls]) {
         root.children.push(blockToGridTable(child, titleById[cls]));
       } else {
@@ -130,5 +156,6 @@ export function plainHtmlToMdast(html, { titleById, JSDOM }) {
       }
     }
   });
+  root.tables = tables;
   return root;
 }

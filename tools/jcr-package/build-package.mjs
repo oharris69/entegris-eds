@@ -43,6 +43,7 @@ const TITLE_BY_ID = {
   'hero-masthead': 'Hero Masthead',
   'teaser-promo': 'Teaser Promo',
   'teaser-cta': 'Teaser CTA',
+  'table': 'Table',
 };
 
 const PAGES = [
@@ -55,6 +56,9 @@ const PAGES = [
   'content/en/home/our-science/by-solution-area/specialty-materials.plain.html',
   'content/en/home/our-science/by-solution-area/substrate-handling.plain.html',
   'content/en/home/resources/technical-information/component-technicalinformation.plain.html',
+  'content/en/home/resources/technical-information/chemlock-filter-housing-technical-information.plain.html',
+  'content/en/home/resources/technical-information/chemlock-filter-housing-technical-information/chemlock-filter-housing-bowl-installation.plain.html',
+  'content/en/home/resources/technical-information/chemlock-filter-housing-technical-information/chemlock-filter-housing-chemical-compatibility.plain.html',
   'content/zh/home.plain.html',
   'content/zh/home/our-science/by-solution-area/contamination-control.plain.html',
   'content/zh/home/our-science/by-solution-area/fluid-management.plain.html',
@@ -120,12 +124,51 @@ function rewriteToDam(xml) {
   });
 }
 
+// Encode an HTML string for use as an XML attribute value.
+function encodeAttr(html) {
+  return html
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// Generate the JCR for a Table block from collected cell data (rows of cell
+// innerHTML). The Table block cannot round-trip through md2jcr (its parent
+// model's `filter` field consumes data cells), so we emit the block node
+// directly, matching the shape md2jcr produces for block items: one item per
+// row named "Row" with model `table-col-N`, cells as columnNtext richtext.
+function tableBlockJcr(rows) {
+  const cols = Math.max(...rows.map((r) => r.length));
+  const model = cols === 1 ? 'table-row' : `table-col-${cols}`;
+  const filter = cols === 1 ? 'table' : `table-${cols}-columns`;
+  const fieldNames = Array.from({ length: cols }, (_, i) => `column${i + 1}text`);
+  const modelFields = `[${fieldNames.join(',')}]`;
+  const items = rows.map((cells, ri) => {
+    const props = fieldNames.map((fn, ci) => {
+      const inner = (cells[ci] || '').trim();
+      const value = inner ? `<p>${inner}</p>` : '';
+      return `${fn}="${encodeAttr(value)}"`;
+    }).join(' ');
+    return `<item_${ri} jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Row" model="${model}" ${props} modelFields="${modelFields}"></item_${ri}>`;
+  }).join('\n          ');
+  return `<block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" filter="${filter}" model="table" modelFields="[classes,filter]" name="Table">\n          ${items}\n        </block>`;
+}
+
 async function toJcr(rel) {
   const html = readFileSync(join(WS, rel), 'utf8');
   const mdast = plainHtmlToMdast(html, { titleById: TITLE_BY_ID, JSDOM });
+  const tables = mdast.tables || [];
   const md = toMarkdown(mdast, { extensions: [gridTablesToMarkdown()], bullet: '-' });
-  const jcr = await md2jcr(md, components);
+  let jcr = await md2jcr(md, components);
   if (!jcr || !jcr.includes('cq:Page')) throw new Error(`bad jcr for ${rel}`);
+  // Splice generated Table block JCR over each placeholder text node. The
+  // marker sits alone in a <text ... text="&lt;p&gt;@@MDTABLE{i}@@&lt;/p&gt;"/>.
+  tables.forEach((rows, i) => {
+    const re = new RegExp(`<text\\b[^>]*text="&lt;p&gt;@@MDTABLE${i}@@&lt;/p&gt;"\\s*/>`);
+    if (!re.test(jcr)) throw new Error(`table marker ${i} not found in ${rel}`);
+    jcr = jcr.replace(re, tableBlockJcr(rows));
+  });
   return rewriteToDam(escapeXmlAmps(jcr));
 }
 
