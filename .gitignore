@@ -26,3 +26,4 @@ tools/jcr-package/build/
 tools/jcr-package/*.zip
 tools/jcr-package/dam-build/
 tools/jcr-package/dam-rewrite-map.json
+tools/jcr-package/full-build/
