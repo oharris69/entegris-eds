@@ -40,3 +40,5 @@ tools/jcr-package/entegris-eds-content.zip
 tools/jcr-package/entegris-eds-dam.zip
 tools/jcr-package/entegris-eds-full.zip
 tools/jcr-package/entegris-eds-root-index.zip
+tools/cf-model/build/
+tools/cf-model/connect-build/
