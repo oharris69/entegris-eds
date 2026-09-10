@@ -58,6 +58,18 @@ const PAGES = [
   'content/zh/home/our-science/by-solution-area/substrate-handling.plain.html',
 ];
 
+// nav + footer render as per-language pages fetched by the header/footer blocks
+// at <lang-root>/nav and <lang-root>/footer (see helix-query.yaml excludes and
+// header.js/footer.js fetch of /content/{nav,footer}.plain.html). The English
+// fragments live at content/{nav,footer}.plain.html; the Chinese at
+// content/zh/{nav,footer}.plain.html. Map each explicitly to its language tree.
+const FRAGMENT_PAGES = [
+  { src: 'content/nav.plain.html', jcr: `${SITE_ROOT}/en/nav` },
+  { src: 'content/footer.plain.html', jcr: `${SITE_ROOT}/en/footer` },
+  { src: 'content/zh/nav.plain.html', jcr: `${SITE_ROOT}/zh/nav` },
+  { src: 'content/zh/footer.plain.html', jcr: `${SITE_ROOT}/zh/footer` },
+];
+
 const components = {
   models: JSON.parse(readFileSync(join(WS, 'component-models.json'), 'utf8')),
   definition: JSON.parse(readFileSync(join(WS, 'component-definition.json'), 'utf8')),
@@ -117,14 +129,21 @@ async function main() {
   writeFileSync(join(vault, 'properties.xml'), propertiesXml());
 
   const report = [];
-  for (const rel of PAGES) {
-    const xml = await toJcr(rel);
-    const pageDir = join(jcrRoot, jcrPathFor(rel).replace(/^\//, ''));
+  const emit = (jcrPath, xml, blocks) => {
+    const pageDir = join(jcrRoot, jcrPath.replace(/^\//, ''));
     mkdirSync(pageDir, { recursive: true });
     writeFileSync(join(pageDir, '.content.xml'), xml);
+    report.push({ jcr: jcrPath, blocks });
+  };
+  for (const rel of PAGES) {
+    const xml = await toJcr(rel);
     const blocks = [...new Set([...xml.matchAll(/model="([\w-]+)"/g)].map((m) => m[1]))]
       .filter((b) => TITLE_BY_ID[b] || ['card', 'column', 'carousel-hero-item'].includes(b));
-    report.push({ jcr: jcrPathFor(rel), blocks });
+    emit(jcrPathFor(rel), xml, blocks);
+  }
+  // nav + footer fragment pages (default content), one per language.
+  for (const { src, jcr } of FRAGMENT_PAGES) {
+    emit(jcr, await toJcr(src), ['(nav/footer fragment)']);
   }
 
   const zipPath = join(OUT_DIR, `${PKG_NAME}.zip`);
