@@ -29,6 +29,9 @@ const SITE_ROOT = '/content/entegris-eds/language-masters';
 const OUT_DIR = join(WS, 'tools/jcr-package');
 const BUILD = join(OUT_DIR, 'build');
 const PKG_NAME = 'entegris-eds-content';
+// Package version — override with PKG_VERSION env var. Appears in both the
+// FileVault manifest and the zip filename (entegris-eds-content-1.0.0.zip).
+const VERSION = process.env.PKG_VERSION || '1.0.0';
 
 const TITLE_BY_ID = {
   'carousel-hero': 'Carousel Hero',
@@ -141,7 +144,7 @@ function propertiesXml() {
   <comment>FileVault Package Definition</comment>
   <entry key="name">${PKG_NAME}</entry>
   <entry key="group">entegris</entry>
-  <entry key="version">1.0.0</entry>
+  <entry key="version">${VERSION}</entry>
   <entry key="packageType">content</entry>
   <entry key="requiresRoot">false</entry>
   <entry key="allowIndexDefinitions">false</entry>
@@ -177,7 +180,7 @@ async function main() {
     emit(jcr, await toJcr(src), ['(nav/footer fragment)']);
   }
 
-  const zipPath = join(OUT_DIR, `${PKG_NAME}.zip`);
+  const zipPath = join(OUT_DIR, `${PKG_NAME}-${VERSION}.zip`);
   if (existsSync(zipPath)) rmSync(zipPath);
   const py = 'import zipfile,os,sys\n'
     + 'root=sys.argv[1]; out=sys.argv[2]\n'

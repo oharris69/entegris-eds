@@ -29,6 +29,14 @@ tools/jcr-package/full-build/
 tools/jcr-package/dam-rewrite-map.json
 tools/jcr-package/asset-mapping.json
 tools/jcr-package/local-assets/
+tools/jcr-package/root-index-build/
+
+# Only the versioned deliverables are tracked (entegris-eds-full-<ver>.zip,
+# entegris-eds-root-index-<ver>.zip). The split sub-package zips and any
+# legacy unversioned zips are local-only.
+tools/jcr-package/entegris-eds-content-*.zip
+tools/jcr-package/entegris-eds-dam-*.zip
 tools/jcr-package/entegris-eds-content.zip
 tools/jcr-package/entegris-eds-dam.zip
-tools/jcr-package/root-index-build/
+tools/jcr-package/entegris-eds-full.zip
+tools/jcr-package/entegris-eds-root-index.zip

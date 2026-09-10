@@ -27,6 +27,7 @@ const OUT_DIR = join(WS, 'tools/jcr-package');
 const BUILD = join(OUT_DIR, 'dam-build');
 const DAM_ROOT = '/content/dam/entegris-eds';
 const PKG_NAME = 'entegris-eds-dam';
+const VERSION = process.env.PKG_VERSION || '1.0.0';
 
 // Local dirs to search for a binary by basename (first match wins).
 const SEARCH_DIRS = [
@@ -109,7 +110,7 @@ function propertiesXml() {
   <comment>FileVault Package Definition</comment>
   <entry key="name">${PKG_NAME}</entry>
   <entry key="group">entegris</entry>
-  <entry key="version">1.0.0</entry>
+  <entry key="version">${VERSION}</entry>
   <entry key="packageType">content</entry>
   <entry key="createdBy">excat-migration</entry>
 </properties>
@@ -156,7 +157,7 @@ function main() {
 
   writeFileSync(join(OUT_DIR, 'dam-rewrite-map.json'), JSON.stringify(rewrite, null, 2));
 
-  const zipPath = join(OUT_DIR, `${PKG_NAME}.zip`);
+  const zipPath = join(OUT_DIR, `${PKG_NAME}-${VERSION}.zip`);
   if (existsSync(zipPath)) rmSync(zipPath);
   const py = 'import zipfile,os,sys\n'
     + 'root=sys.argv[1]; out=sys.argv[2]\n'

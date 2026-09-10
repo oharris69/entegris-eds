@@ -22,6 +22,7 @@ const CONTENT_BUILD = join(OUT_DIR, 'build');
 const DAM_BUILD = join(OUT_DIR, 'dam-build');
 const COMBINED = join(OUT_DIR, 'full-build');
 const PKG_NAME = 'entegris-eds-full';
+const VERSION = process.env.PKG_VERSION || '1.0.0';
 const SITE_ROOT = '/content/entegris-eds/language-masters';
 const DAM_ROOT = '/content/dam/entegris-eds';
 
@@ -46,7 +47,7 @@ function propertiesXml() {
   <comment>FileVault Package Definition</comment>
   <entry key="name">${PKG_NAME}</entry>
   <entry key="group">entegris</entry>
-  <entry key="version">1.0.0</entry>
+  <entry key="version">${VERSION}</entry>
   <entry key="packageType">content</entry>
   <entry key="requiresRoot">false</entry>
   <entry key="allowIndexDefinitions">false</entry>
@@ -71,7 +72,7 @@ cpSync(join(DAM_BUILD, 'jcr_root'), join(COMBINED, 'jcr_root'), { recursive: tru
 writeFileSync(join(vault, 'filter.xml'), filterXml());
 writeFileSync(join(vault, 'properties.xml'), propertiesXml());
 
-const zipPath = join(OUT_DIR, `${PKG_NAME}.zip`);
+const zipPath = join(OUT_DIR, `${PKG_NAME}-${VERSION}.zip`);
 if (existsSync(zipPath)) rmSync(zipPath);
 const py = 'import zipfile,os,sys\n'
   + 'root=sys.argv[1]; out=sys.argv[2]\n'
