@@ -21,8 +21,13 @@ tools/importer/*.bundle.js
 /en/
 tools/importer/*.bak
 
-# JCR package intermediate build dirs (the .zip deliverables ARE tracked)
+# JCR package: only the combined entegris-eds-full.zip is a tracked deliverable.
+# Intermediate build dirs and the split sub-zips are local-only.
 tools/jcr-package/build/
 tools/jcr-package/dam-build/
 tools/jcr-package/full-build/
 tools/jcr-package/dam-rewrite-map.json
+tools/jcr-package/asset-mapping.json
+tools/jcr-package/local-assets/
+tools/jcr-package/entegris-eds-content.zip
+tools/jcr-package/entegris-eds-dam.zip
