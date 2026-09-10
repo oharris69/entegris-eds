@@ -1,22 +1,20 @@
 {
   "mappings": [
-    "/content/wknd-universal/language-masters/en:/",
-    "/content/wknd-universal/language-masters/en/:/en/",
-    "/content/wknd-universal/language-masters/fr/:/fr/",
-    "/content/wknd-universal/language-masters/fr:/fr",
-    "/content/wknd-universal/language-masters/es/:/es/",
-    "/content/wknd-universal/language-masters/es:/es",
-    "/content/wknd-universal/language-masters/ja/:/ja/",
-    "/content/wknd-universal/language-masters/ja:/ja",
-    "/content/wknd-universal/language-masters/de/:/de/",
-    "/content/wknd-universal/language-masters/de:/de",
-    "/content/wknd-universal/configuration:/.helix/config.json",
-    "/content/wknd-universal/metadata:/metadata.json",
-    "/content/wknd-universal/redirects:/redirects.json",
-    "/content/wknd-universal/placeholders:/placeholders.json"
+    "/content/entegris-eds/language-masters/en:/",
+    "/content/entegris-eds/language-masters/en/:/en/",
+    "/content/entegris-eds/language-masters/es/:/es/",
+    "/content/entegris-eds/language-masters/es:/es",
+    "/content/entegris-eds/language-masters/ja/:/ja/",
+    "/content/entegris-eds/language-masters/ja:/ja",
+    "/content/entegris-eds/language-masters/zh/:/zh/",
+    "/content/entegris-eds/language-masters/zh:/zh",
+    "/content/entegris-eds/configuration:/.helix/config.json",
+    "/content/entegris-eds/metadata:/metadata.json",
+    "/content/entegris-eds/redirects:/redirects.json",
+    "/content/entegris-eds/placeholders:/placeholders.json"
   ],
   "includes": [
-    "/content/wknd-universal/",
-    "/content/dam/wknd-universal/"
+    "/content/entegris-eds/",
+    "/content/dam/entegris-eds/"
   ]
 }
