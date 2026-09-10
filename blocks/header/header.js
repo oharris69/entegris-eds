@@ -66,6 +66,20 @@ export default async function decorate(block) {
   if (sections) sections.classList.add('nav-sections');
   if (tools) tools.classList.add('nav-tools');
 
+  // Ensure the brand logo is present. The published nav fragment can lose the
+  // logo <img> (the source ref isn't a resolvable image at publish time), so
+  // inject it into the brand link if it's missing.
+  if (brand) {
+    const brandLink = brand.querySelector('a');
+    if (brandLink && !brandLink.querySelector('img')) {
+      const logo = document.createElement('img');
+      logo.src = '/images/logo.svg';
+      logo.alt = 'Entegris';
+      logo.width = 130;
+      brandLink.append(logo);
+    }
+  }
+
   // Wire up dropdowns on the top-level nav items.
   if (sections) {
     sections.querySelectorAll(':scope > ul > li').forEach((li) => {

@@ -35,6 +35,19 @@ export default async function decorate(block) {
   if (social) social.classList.add('footer-social');
   if (legal) legal.classList.add('footer-legal');
 
+  // Inject the brand logo if the published fragment lost the <img> (same reason
+  // as the header).
+  if (brand) {
+    const brandLink = brand.querySelector('a');
+    if (brandLink && !brandLink.querySelector('img')) {
+      const logo = document.createElement('img');
+      logo.src = '/images/logo.svg';
+      logo.alt = 'Entegris';
+      logo.width = 130;
+      brandLink.append(logo);
+    }
+  }
+
   block.textContent = '';
   block.append(footer);
 }
