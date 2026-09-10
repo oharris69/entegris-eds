@@ -116,12 +116,22 @@ function damBasenames() {
 function rewriteToDam(xml) {
   if (!DAM_REWRITE) return xml;
   const names = damBasenames();
-  return xml.replace(/((?:image|src|fileReference)=")([^"]+)(")/g, (m, pre, url, post) => {
+  let out = xml.replace(/((?:image|src|fileReference)=")([^"]+)(")/g, (m, pre, url, post) => {
     if (url.startsWith(DAM_ROOT)) return m; // already DAM
     const base = url.split('?')[0].split('#')[0].split('/').pop();
     if (base && names.has(base)) return `${pre}${DAM_ROOT}/${base}${post}`;
     return m;
   });
+  // Second pass: images embedded inside richtext fields appear as escaped HTML
+  // (e.g. src&#x3D;&quot;/media-da/<hash>.png&quot;), so the attribute regex
+  // above never sees them. Rewrite any /media-da/<basename> occurrence whose
+  // binary we packaged, regardless of surrounding (un)escaped quoting. The
+  // /media-da/ prefix + hashed filename is unambiguous, so a global path
+  // replace is safe.
+  out = out.replace(/\/media-da\/([A-Za-z0-9._-]+)/g, (m, base) => (
+    names.has(base) ? `${DAM_ROOT}/${base}` : m
+  ));
+  return out;
 }
 
 // Encode an HTML string for use as an XML attribute value.

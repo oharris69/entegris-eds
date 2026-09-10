@@ -1,13 +1,13 @@
 # Entegris EDS — AEM content package
 
-**`entegris-eds-full-1.2.2.zip`** is the single, ready-to-upload AEM content package
+**`entegris-eds-full-1.2.3.zip`** is the single, ready-to-upload AEM content package
 for the migrated Entegris content.
 
 ## Install
 
 1. Open Package Manager on the author:
    `https://author-p7954-e2285674.adobeaemcloud.com/crx/packmgr`
-2. **Upload Package** → choose `entegris-eds-full-1.2.2.zip`
+2. **Upload Package** → choose `entegris-eds-full-1.2.3.zip`
 3. **Install**
 
 That's it — one package, one install. No need to install anything else.
