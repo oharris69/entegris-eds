@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EDS Local Preview</title>
+  <script type="text/javascript">
+    // Local preview harness. The `aem up` document route proxies HTML from the
+    // fstab author mountpoint, which does not have this migrated content
+    // published — so /content/<path> 404s. This page instead fetches the local
+    // .plain.html fragment and runs the project's real decoration pipeline
+    // (decorateMain + loadSections + header/footer) so you can preview pages
+    // that live only on disk. Usage: /tools/preview/preview.html?path=/content/en/home
+    window.hlx = window.hlx || {};
+    window.hlx.codeBasePath = '';
+  </script>
+  <link rel="stylesheet" href="/styles/styles.css">
+</head>
+<body>
+  <header></header>
+  <main></main>
+  <footer></footer>
+  <script type="module">
+    import { decorateMain } from '/scripts/scripts.js';
+    import { loadHeader, loadFooter, loadBlock, loadCSS } from '/scripts/aem.js';
+
+    const params = new URLSearchParams(window.location.search);
+    let path = params.get('path') || '/content/en/home';
+    // normalize: accept /content/en/home or /content/en/home.plain.html
+    const plainPath = path.endsWith('.plain.html') ? path : `${path}.plain.html`;
+
+    async function run() {
+      const main = document.querySelector('main');
+      try {
+        const resp = await fetch(plainPath);
+        if (!resp.ok) {
+          main.innerHTML = `<div style="padding:2rem;font-family:sans-serif">Preview fragment not found: <code>${plainPath}</code> (HTTP ${resp.status})</div>`;
+          return;
+        }
+        main.innerHTML = await resp.text();
+        // Run the real project decoration so blocks/sections render like production.
+        await decorateMain(main);
+        document.body.classList.add('appear');
+        main.querySelectorAll('.section').forEach((s) => { s.dataset.sectionStatus = 'loaded'; s.style.display = null; });
+        // Load each block's JS/CSS directly (mirrors loadSections without the
+        // section-status race that trips this standalone harness).
+        const blocks = [...main.querySelectorAll('.block')];
+        // eslint-disable-next-line no-restricted-syntax
+        for (const block of blocks) {
+          // eslint-disable-next-line no-await-in-loop
+          try { await loadBlock(block); } catch (e) { /* per-block, non-fatal */ }
+        }
+      } catch (e) {
+        main.innerHTML = `<div style="padding:2rem;font-family:sans-serif;color:#b31a1b">Preview error: ${e.message}</div>`;
+      }
+      // Header + footer come from content/nav.plain.html + content/footer.plain.html.
+      try { await loadHeader(document.querySelector('header')); } catch (e) { /* noop */ }
+      try { await loadFooter(document.querySelector('footer')); } catch (e) { /* noop */ }
+      document.body.classList.add('appear');
+    }
+    run();
+  </script>
+</body>
+</html>
