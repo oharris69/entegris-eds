@@ -7,7 +7,11 @@
       "contentHostUrl": "author-p7954-e2285674.adobeaemcloud.com",
       "baseUrl": "https://www.entegris.com",
       "libraryUrl": "https://main--sta-xwalk-boilerplate--aemysites.aem.page/tools/sidekick/library.json",
-      "botProtected": true
+      "botProtected": true,
+      "aemSitePath": "/content/entegris-eds",
+      "aemAssetsFolderPath": "/content/dam/entegris-eds",
+      "aemSiteName": "entegris-eds",
+      "aemSiteTitle": "Entegris"
     }
   }
 }
