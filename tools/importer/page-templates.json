@@ -460,6 +460,23 @@
         }
       ],
       "urlPattern": "/en/home/our-science/by-solution-area/*"
+    },
+    {
+      "name": "component-tech-info",
+      "urls": [
+        "https://www.entegris.com/en/home/resources/technical-information/component-technicalinformation.html"
+      ],
+      "representativeUrl": "https://www.entegris.com/en/home/resources/technical-information/component-technicalinformation.html",
+      "description": "Component Technical Information hub: title + intro prose, a featured-white-paper promo, and a 4-card sub-topic grid.",
+      "blocks": [
+        { "name": "teaser-promo", "instances": [".espot.two-col", ".espot-wrapper.desktop"] },
+        { "name": "cards-products", "instances": [".plp-container .card-list", ".card-list"] }
+      ],
+      "sections": [
+        { "id": "cti-main", "name": "Intro + featured white paper", "selector": "#maincontent > div.one-column-page", "style": null, "blocks": ["teaser-promo"], "defaultContent": ["#maincontent > div.one-column-page"] },
+        { "id": "cti-grid", "name": "Sub-topic grid", "selector": ".pagelist .plp-container", "style": null, "blocks": ["cards-products"], "defaultContent": [] }
+      ],
+      "urlPattern": "/en/home/resources/technical-information/*"
     }
   ]
 }

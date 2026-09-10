@@ -54,6 +54,7 @@ const PAGES = [
   'content/en/home/our-science/by-solution-area/fluid-management.plain.html',
   'content/en/home/our-science/by-solution-area/specialty-materials.plain.html',
   'content/en/home/our-science/by-solution-area/substrate-handling.plain.html',
+  'content/en/home/resources/technical-information/component-technicalinformation.plain.html',
   'content/zh/home.plain.html',
   'content/zh/home/our-science/by-solution-area/contamination-control.plain.html',
   'content/zh/home/our-science/by-solution-area/fluid-management.plain.html',

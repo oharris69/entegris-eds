@@ -34,9 +34,10 @@
     "pagesUsing": [
       "/en/home/products",
       "/en/home/products/chemistries/specialty-chemicals/post-cmp-cleaning-solutions/semiconductor-cleaning-solutions",
-      "/en/home/our-science/by-solution-area/contamination-control"
+      "/en/home/our-science/by-solution-area/contamination-control",
+      "/en/home/resources/technical-information/component-technicalinformation"
     ],
-    "reuseCount": 3,
-    "lastUsed": "2026-09-09T00:00:00.000Z"
+    "reuseCount": 4,
+    "lastUsed": "2026-09-10T18:59:12.277Z"
   }
 }
