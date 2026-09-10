@@ -11,7 +11,7 @@
  * Output: tools/jcr-package/entegris-eds-root-index.zip
  * Usage:  node tools/jcr-package/build-root-index-package.mjs [workspaceRoot]
  */
-import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync } from 'fs';
 import { join, resolve } from 'path';
 import { execSync } from 'child_process';
 import { plainHtmlToMdast } from './plain2md.mjs';
@@ -46,12 +46,33 @@ const NODES = [
   { src: 'content/zh/home.plain.html', jcr: `${SITE_ROOT}/zh` },
 ];
 
+const DAM_ROOT = '/content/dam/entegris-eds';
+let DAM_BASENAMES = null;
+function damBasenames() {
+  if (DAM_BASENAMES) return DAM_BASENAMES;
+  const set = new Set();
+  for (const d of ['content/media-da', 'migration-work/images', 'content/images']) {
+    const full = join(WS, d);
+    if (existsSync(full)) for (const f of readdirSync(full)) set.add(f);
+  }
+  DAM_BASENAMES = set; return set;
+}
+function rewriteToDam(xml) {
+  const names = damBasenames();
+  return xml.replace(/((?:image|src|fileReference)=")([^"]+)(")/g, (m, pre, url, post) => {
+    if (url.startsWith(DAM_ROOT)) return m;
+    const base = url.split('?')[0].split('#')[0].split('/').pop();
+    return (base && names.has(base)) ? `${pre}${DAM_ROOT}/${base}${post}` : m;
+  });
+}
+
 async function toJcr(rel) {
   const html = readFileSync(join(WS, rel), 'utf8');
   const mdast = plainHtmlToMdast(html, { titleById: TITLE_BY_ID, JSDOM });
   const md = toMarkdown(mdast, { extensions: [gridTablesToMarkdown()], bullet: '-' });
   const jcr = await md2jcr(md, components);
-  return jcr.replace(/&(?!amp;|lt;|gt;|quot;|apos;|#\d+;|#x[0-9a-fA-F]+;)/g, '&amp;');
+  const escaped = jcr.replace(/&(?!amp;|lt;|gt;|quot;|apos;|#\d+;|#x[0-9a-fA-F]+;)/g, '&amp;');
+  return rewriteToDam(escaped);
 }
 
 function filterXml() {

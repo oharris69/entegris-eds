@@ -13,7 +13,7 @@
  * Output: tools/jcr-package/entegris-eds-content.zip
  * Usage:  node tools/jcr-package/build-package.mjs [workspaceRoot]
  */
-import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync } from 'fs';
 import { join, resolve } from 'path';
 import { execSync } from 'child_process';
 import { plainHtmlToMdast } from './plain2md.mjs';
@@ -85,13 +85,44 @@ function escapeXmlAmps(xml) {
   return xml.replace(/&(?!amp;|lt;|gt;|quot;|apos;|#\d+;|#x[0-9a-fA-F]+;)/g, '&amp;');
 }
 
+const DAM_ROOT = '/content/dam/entegris-eds';
+// Rewrite image references in the JCR XML to their DAM asset path. The DAM
+// package stores each image at /content/dam/entegris-eds/<basename>, and every
+// content image ref maps 1:1 by basename (verified). Only rewrite refs whose
+// binary we actually packaged (asset-mapping keys); leave anything else (e.g.
+// external Scene7 chrome) untouched. Matches src=/image=/fileReference= values.
+const DAM_REWRITE = process.env.DAM_REWRITE !== '0';
+let DAM_BASENAMES = null;
+function damBasenames() {
+  if (DAM_BASENAMES) return DAM_BASENAMES;
+  // Source of truth: the local binaries the DAM builder packages.
+  const dirs = ['content/media-da', 'migration-work/images', 'content/images'];
+  const set = new Set();
+  for (const d of dirs) {
+    const full = join(WS, d);
+    if (existsSync(full)) for (const f of readdirSync(full)) set.add(f);
+  }
+  DAM_BASENAMES = set;
+  return set;
+}
+function rewriteToDam(xml) {
+  if (!DAM_REWRITE) return xml;
+  const names = damBasenames();
+  return xml.replace(/((?:image|src|fileReference)=")([^"]+)(")/g, (m, pre, url, post) => {
+    if (url.startsWith(DAM_ROOT)) return m; // already DAM
+    const base = url.split('?')[0].split('#')[0].split('/').pop();
+    if (base && names.has(base)) return `${pre}${DAM_ROOT}/${base}${post}`;
+    return m;
+  });
+}
+
 async function toJcr(rel) {
   const html = readFileSync(join(WS, rel), 'utf8');
   const mdast = plainHtmlToMdast(html, { titleById: TITLE_BY_ID, JSDOM });
   const md = toMarkdown(mdast, { extensions: [gridTablesToMarkdown()], bullet: '-' });
   const jcr = await md2jcr(md, components);
   if (!jcr || !jcr.includes('cq:Page')) throw new Error(`bad jcr for ${rel}`);
-  return escapeXmlAmps(jcr);
+  return rewriteToDam(escapeXmlAmps(jcr));
 }
 
 function filterXml() {
