@@ -11,7 +11,9 @@ export default async function decorate(block) {
   if (!resp.ok) resp = await fetch('/footer.plain.html');
   if (!resp.ok) return;
 
-  const html = await resp.text();
+  // Make the relative logo path ("images/logo.svg") absolute so it resolves
+  // from any page depth rather than 404ing.
+  const html = (await resp.text()).replace(/src="images\//g, 'src="/images/');
   const footer = document.createElement('div');
   footer.innerHTML = html;
 

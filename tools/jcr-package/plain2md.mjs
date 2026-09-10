@@ -94,18 +94,26 @@ function blockToGridTable(blockDiv, title) {
   };
 }
 
-function sectionMetadataTable(div) {
+// Build a metadata gridTable (key/value rows). `title` is the header cell text
+// md2jcr matches on: "Section Metadata" → section props, "Metadata" → page
+// properties (jcr:title/jcr:description/og image, mapped onto jcr:content).
+// The value cell keeps images as image nodes so og:image maps to
+// xwalk:imageReference rather than being flattened to text.
+function metadataTable(div, title) {
   const rows = [...div.querySelectorAll(':scope > div')].map((r) => {
     const c = [...r.children];
-    return gtRow([
-      gtCell([para([txt((c[0]?.textContent || '').trim())])]),
-      gtCell([para([txt((c[1]?.textContent || '').trim())])]),
-    ]);
+    const key = (c[0]?.textContent || '').trim();
+    const valEl = c[1];
+    const img = valEl && valEl.querySelector('img');
+    const valueCell = img
+      ? gtCell([para([{ type: 'image', url: img.getAttribute('src') || '', alt: img.getAttribute('alt') || '' }])])
+      : gtCell([para([txt((valEl?.textContent || '').trim())])]);
+    return gtRow([gtCell([para([txt(key)])]), valueCell]);
   });
   return {
     type: 'gridTable',
     children: [
-      { type: 'gtHeader', children: [gtRow([gtCell([para([txt('Section Metadata')])])])] },
+      { type: 'gtHeader', children: [gtRow([gtCell([para([txt(title)])])])] },
       { type: 'gtBody', children: rows },
     ],
   };
@@ -139,7 +147,12 @@ export function plainHtmlToMdast(html, { titleById, JSDOM }) {
     for (const child of section.children) {
       const cls = child.classList && child.classList[0];
       if (child.classList && child.classList.contains('section-metadata')) {
-        root.children.push(sectionMetadataTable(child));
+        root.children.push(metadataTable(child, 'Section Metadata'));
+      } else if (child.classList && child.classList.contains('metadata')) {
+        // Page-level metadata block → "Metadata" gridTable, which md2jcr's
+        // pageHelper folds into jcr:content page properties (title, description,
+        // og:image) instead of leaving it as visible body content.
+        root.children.push(metadataTable(child, 'Metadata'));
       } else if (child.classList && child.classList.contains('table')) {
         // Table block — emit a placeholder paragraph isolated in its own
         // section (thematic breaks) so it lands as a standalone <text> node the

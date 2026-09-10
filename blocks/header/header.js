@@ -35,7 +35,10 @@ export default async function decorate(block) {
   if (!resp.ok) resp = await fetch('/nav.plain.html');
   if (!resp.ok) return;
 
-  const html = await resp.text();
+  // The nav fragment references the logo with a relative path
+  // ("images/logo.svg"); make it absolute so it resolves from any page depth
+  // (e.g. /en/home/about-us/locations) rather than 404ing.
+  const html = (await resp.text()).replace(/src="images\//g, 'src="/images/');
   const fragment = document.createElement('div');
   fragment.innerHTML = html;
 

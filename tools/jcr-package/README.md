@@ -1,13 +1,13 @@
 # Entegris EDS — AEM content package
 
-**`entegris-eds-full-1.2.0.zip`** is the single, ready-to-upload AEM content package
+**`entegris-eds-full-1.2.1.zip`** is the single, ready-to-upload AEM content package
 for the migrated Entegris content.
 
 ## Install
 
 1. Open Package Manager on the author:
    `https://author-p7954-e2285674.adobeaemcloud.com/crx/packmgr`
-2. **Upload Package** → choose `entegris-eds-full-1.2.0.zip`
+2. **Upload Package** → choose `entegris-eds-full-1.2.1.zip`
 3. **Install**
 
 That's it — one package, one install. No need to install anything else.
@@ -34,9 +34,10 @@ the wrenches part-number list) authored as **Table blocks** — see
 node tools/jcr-package/build-combined-package.mjs
 ```
 
-Regenerates `entegris-eds-full-1.1.0.zip` from the migrated `content/**.plain.html`
-pages and local image binaries. Helpers: `build-package.mjs` (content),
-`build-dam-package.mjs` (assets), `plain2md.mjs` (block → JCR conversion).
+Regenerates the versioned `entegris-eds-full-<ver>.zip` (set `PKG_VERSION`) from
+the migrated `content/**.plain.html` pages and local image binaries. Helpers:
+`build-package.mjs` (content), `build-dam-package.mjs` (assets), `plain2md.mjs`
+(block → JCR conversion).
 
 ## Notes
 
@@ -45,4 +46,7 @@ pages and local image binaries. Helpers: `build-package.mjs` (content),
   resolves from the package with no separate asset-mapping step.
 - The header/footer blocks (`blocks/header`, `blocks/footer`) must be deployed
   to this environment for nav/footer to render.
+- Page-level metadata blocks map to `jcr:content` page properties
+  (`jcr:title`, `jcr:description`) via md2jcr's page helper — they are not
+  emitted as visible body content.
 - Chinese content is machine-translated — flag for native review before publish.
