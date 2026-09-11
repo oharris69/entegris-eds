@@ -78,6 +78,21 @@ const FRAGMENT_PAGES = [
   { src: 'content/zh/footer.plain.html', jcr: `${SITE_ROOT}/zh/footer` },
 ];
 
+// The site root `/` (and `/zh`) is served by a real `index` PAGE, not the bare
+// language node — a bare language container can't be refetched by AEM's
+// franklin.delivery pipeline, so Sidekick "Update" on `/` fails. The index
+// pages duplicate the home content and are mapped by paths.json
+// (language-masters/en/index -> / , language-masters/zh/index -> /zh).
+// These MUST ship in the full package: its filter is rooted at the whole
+// `en`/`zh` subtrees in replace mode, so a separately-installed root-index
+// package gets wiped by any later full-package install. Folding them in keeps
+// `/` a single, self-contained install. (Supersedes the standalone
+// build-root-index-package.mjs.)
+const INDEX_PAGES = [
+  { src: 'content/en/home.plain.html', jcr: `${SITE_ROOT}/en/index` },
+  { src: 'content/zh/home.plain.html', jcr: `${SITE_ROOT}/zh/index` },
+];
+
 const components = {
   models: JSON.parse(readFileSync(join(WS, 'component-models.json'), 'utf8')),
   definition: JSON.parse(readFileSync(join(WS, 'component-definition.json'), 'utf8')),
@@ -232,6 +247,10 @@ async function main() {
   // nav + footer fragment pages (default content), one per language.
   for (const { src, jcr } of FRAGMENT_PAGES) {
     emit(jcr, await toJcr(src), ['(nav/footer fragment)']);
+  }
+  // Root `index` pages: same content as home, served at / and /zh (paths.json).
+  for (const { src, jcr } of INDEX_PAGES) {
+    emit(jcr, await toJcr(src), ['(root index → home)']);
   }
 
   const zipPath = join(OUT_DIR, `${PKG_NAME}-${VERSION}.zip`);
