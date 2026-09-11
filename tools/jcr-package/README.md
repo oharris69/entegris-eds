@@ -1,17 +1,22 @@
 # Entegris EDS — AEM content package
 
-**`entegris-eds-full-1.2.4.zip`** is the single, ready-to-upload AEM content package
+**`entegris-eds-full-1.2.5.zip`** is the single, ready-to-upload AEM content package
 for the migrated Entegris content.
 
 ## Install
 
 1. Open Package Manager on the author:
    `https://author-p7954-e2285674.adobeaemcloud.com/crx/packmgr`
-2. **Upload Package** → choose `entegris-eds-full-1.2.4.zip`
+2. **Upload Package** → choose `entegris-eds-full-1.2.5.zip`
 3. **Install**
 
 That's it — one package, one install. No need to install anything else.
 
+> **1.2.5** fixes the "Working Together" section: the *see customer engagement
+> model* button (empty `link` on the source, which was a JS popup) now points to
+> `about-us/corporate-overview.html` per language, and a leftover empty button
+> was removed. Applies to the `en`/`zh` `index` and `home` pages.
+>
 > **1.2.4** folds the site-root `index` pages (`language-masters/{en,zh}/index`,
 > served at `/` and `/zh`) into this package. Earlier they shipped as a separate
 > `entegris-eds-root-index` package — but the full package's filter is rooted at
