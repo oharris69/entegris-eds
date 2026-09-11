@@ -66,6 +66,30 @@ export default async function decorate(block) {
   if (sections) sections.classList.add('nav-sections');
   if (tools) tools.classList.add('nav-tools');
 
+  // Normalize the sections structure. The published nav fragment expresses each
+  // top-level category as a <p> (the category link) immediately followed by a
+  // sibling <ul> of its child links — repeated per category. The dropdown
+  // wiring below expects instead a single <ul> whose <li>s are the categories,
+  // each holding its child <ul>. Without this rebuild every category and all
+  // its children collapse into one flat vertical list (the broken "left rail").
+  if (sections && !sections.querySelector(':scope > ul > li > ul')) {
+    const topUl = document.createElement('ul');
+    [...sections.children].forEach((child) => {
+      if (child.tagName === 'P' && child.querySelector('a')) {
+        const li = document.createElement('li');
+        li.append(child.querySelector('a'));
+        topUl.append(li);
+      } else if (child.tagName === 'UL') {
+        // Attach this list as the dropdown of the most recent category.
+        const lastLi = topUl.lastElementChild;
+        if (lastLi) lastLi.append(child);
+        else topUl.append(child);
+      }
+    });
+    sections.textContent = '';
+    sections.append(topUl);
+  }
+
   // Ensure the brand logo is present. The published nav fragment can lose the
   // logo <img> (the source ref isn't a resolvable image at publish time), so
   // inject it into the brand link if it's missing.
